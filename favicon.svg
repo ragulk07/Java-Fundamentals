@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <linearGradient id="cup" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <linearGradient id="steam" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <path d="M26 15 Q29 19 26 23 Q23 27 26 31" fill="none" stroke="url(#steam)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M32 12 Q35 17 32 22 Q29 26 32 31" fill="none" stroke="url(#steam)" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M38 15 Q41 19 38 23 Q35 27 38 31" fill="none" stroke="url(#steam)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M17 33 H43 V42 C43 48 38 52 30 52 C22 52 17 48 17 42 Z" fill="url(#cup)"/>
+  <path d="M42 36 H46 C49 36 51 38 51 41 C51 44 49 46 46 46 H42" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M19 55 H41" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+</svg>
