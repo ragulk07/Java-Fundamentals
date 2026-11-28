@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Java LeetCode & Thinking Quiz</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --ink: #0f172a;
+  --ink-secondary: #475569;
+  --mut: #64748b;
+  --line: #e2e8f0;
+  --line-focus: #3b82f6;
+  --ed-bg: #ffffff;
+  --gut-bg: #f8fafc;
+  --pri: #2563eb;
+  --pri-hover: #1d4ed8;
+  --ok: #16a34a;
+  --ok-bg: #dcfce7;
+  --ok-line: #86efac;
+  --bad: #dc2626;
+  --bad-bg: #fee2e2;
+  --bad-line: #fca5a5;
+  --part: #ea580c;
+  --part-bg: #ffedd5;
+  --part-line: #fdba74;
+  --star: #eab308;
+  --star-bg: #fef9c3;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08);
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --font-mono: Consolas, 'Cascadia Mono', 'Segoe UI Mono', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #090d16;
+    --surface: #111827;
+    --surface-alt: #1a2234;
+    --ink: #f8fafc;
+    --ink-secondary: #cbd5e1;
+    --mut: #94a3b8;
+    --line: #1f293d;
+    --line-focus: #60a5fa;
+    --ed-bg: #0c121e;
+    --gut-bg: #0f1624;
+    --pri: #3b82f6;
+    --pri-hover: #60a5fa;
+    --ok: #22c55e;
+    --ok-bg: #052e16;
+    --ok-line: #166534;
+    --bad: #ef4444;
+    --bad-bg: #450a0a;
+    --bad-line: #991b1b;
+    --part: #f97316;
+    --part-bg: #431407;
+    --part-line: #9a3412;
+    --star: #facc15;
+    --star-bg: #422006;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+  }
+}
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --ink: #0f172a;
+  --ink-secondary: #475569;
+  --mut: #64748b;
+  --line: #e2e8f0;
+  --line-focus: #3b82f6;
+  --ed-bg: #ffffff;
+  --gut-bg: #f8fafc;
+}
+:root[data-theme="dark"] {
+  --bg: #090d16;
+  --surface: #111827;
+  --surface-alt: #1a2234;
+  --ink: #f8fafc;
+  --ink-secondary: #cbd5e1;
+  --mut: #94a3b8;
+  --line: #1f293d;
+  --line-focus: #60a5fa;
+  --ed-bg: #0c121e;
+  --gut-bg: #0f1624;
+  --pri: #3b82f6;
+  --pri-hover: #60a5fa;
+  --ok: #22c55e;
+  --ok-bg: #052e16;
+  --ok-line: #166534;
+  --bad: #ef4444;
+  --bad-bg: #450a0a;
+  --bad-line: #991b1b;
+  --part: #f97316;
+  --part-bg: #431407;
+  --part-line: #9a3412;
+  --star: #facc15;
+  --star-bg: #422006;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  padding: 20px 16px 40px;
+  transition: background-color 0.2s, color 0.2s;
+}
+.w { max-width: 1200px; margin: 0 auto; }
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--pri), #818cf8);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: #fff; box-shadow: 0 2px 8px rgb(37 99 235 / 0.35);
+}
+h1 { font-size: 20px; font-weight: 700; color: var(--ink); }
+.brand-sub { font-size: 13px; color: var(--mut); margin-top: 2px; }
+.hdr-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.prog-wrap {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface-alt); padding: 8px 14px;
+  border-radius: 30px; border: 1px solid var(--line);
+}
+.prog-bar-bg { width: 120px; height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.prog-bar-fill { width: 0%; height: 100%; background: var(--ok); border-radius: 99px; transition: width 0.3s; }
+.prog-text { font-size: 13px; font-weight: 600; color: var(--ink-secondary); white-space: nowrap; }
+.btn-icon {
+  width: 38px; height: 38px; border-radius: 9px;
+  border: 1px solid var(--line); background: var(--surface-alt);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; transition: all 0.2s;
+}
+.btn-icon:hover { border-color: var(--pri); background: var(--surface); }
+
+/* Navigation Card */
+.nav-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.nav-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tab-btn {
+  font-size: 13px; font-weight: 600; padding: 6px 12px;
+  border-radius: 20px; border: 1px solid var(--line);
+  background: var(--surface-alt); color: var(--mut);
+  transition: all 0.15s;
+}
+.tab-btn:hover { color: var(--ink); border-color: var(--line-focus); }
+.tab-btn.active { background: var(--pri); color: #fff; border-color: var(--pri); }
+.jump-box { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--mut); }
+.jump-box input {
+  width: 65px; padding: 5px 8px; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--surface-alt); color: var(--ink);
+  font-size: 13px; outline: none; text-align: center;
+}
+.jump-box input:focus { border-color: var(--pri); }
+.nav-grid {
+  display: flex; flex-wrap: wrap; gap: 6px; max-height: 160px;
+  overflow-y: auto; padding-right: 4px;
+}
+.nav-grid::-webkit-scrollbar { width: 6px; }
+.nav-grid::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+.nav-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface-alt);
+  font-size: 13px; font-weight: 600; color: var(--mut);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; position: relative;
+}
+.nav-btn:hover { border-color: var(--pri); color: var(--ink); transform: translateY(-1px); }
+.nav-btn.cur { outline: 2px solid var(--pri); outline-offset: 1px; color: var(--pri); font-weight: 700; background: var(--surface); }
+.nav-btn.ok { background: var(--ok-bg); border-color: var(--ok-line); color: var(--ok); }
+.nav-btn.part { background: var(--part-bg); border-color: var(--part-line); color: var(--part); }
+.nav-btn.flagged::after {
+  content: '★'; position: absolute; top: -3px; right: -2px;
+  font-size: 11px; color: var(--star);
+}
+
+/* Problem Layout */
+.q-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 20px; }
+@media (max-width: 860px) { .q-wrap { grid-template-columns: 1fr; } }
+
+/* Sidebar */
+.sidebar-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  padding: 18px; align-self: start;
+}
+.q-meta-head { margin-bottom: 14px; }
+.q-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--mut); }
+.q-num-large { font-size: 32px; font-weight: 800; color: var(--ink); line-height: 1.1; margin: 4px 0; }
+.q-num-large span { font-size: 16px; font-weight: 500; color: var(--mut); }
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 700;
+  margin-bottom: 12px;
+}
+.status-badge.ok { background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok-line); }
+.status-badge.bad { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad-line); }
+.status-badge.part { background: var(--part-bg); color: var(--part); border: 1px solid var(--part-line); }
+.status-badge.un { background: var(--surface-alt); color: var(--mut); border: 1px solid var(--line); }
+
+.mark-text { font-size: 13px; color: var(--ink-secondary); margin-bottom: 14px; }
+.btn-flag {
+  width: 100%; padding: 8px 12px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface-alt);
+  font-size: 13px; font-weight: 600; color: var(--ink-secondary);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  transition: all 0.15s;
+}
+.btn-flag:hover { border-color: var(--star); color: var(--star); }
+.btn-flag.active { background: var(--star-bg); border-color: var(--star); color: var(--star); font-weight: 700; }
+
+/* Main Panel */
+.main-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  padding: 24px; min-width: 0;
+}
+.tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.topic-tag {
+  background: var(--surface-alt); color: var(--pri);
+  border: 1px solid var(--line); font-size: 12px; font-weight: 700;
+  padding: 3px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.3px;
+}
+.q-title { font-size: 15px; font-weight: 500; line-height: 1.6; color: var(--ink); white-space: pre-wrap; margin-bottom: 16px; }
+
+/* Example Box */
+.ex-card {
+  background: var(--surface-alt); border: 1px solid var(--line);
+  border-radius: 8px; padding: 12px 14px; margin-bottom: 20px;
+}
+.ex-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 12px; font-weight: 700; color: var(--mut); text-transform: uppercase; letter-spacing: 0.4px; }
+.btn-copy { font-size: 12px; color: var(--pri); font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+.btn-copy:hover { text-decoration: underline; }
+.ex-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ex-table th, .ex-table td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+.ex-table th { background: var(--surface); color: var(--mut); font-weight: 600; font-size: 12px; }
+.ex-table pre { font-family: var(--font-mono); font-size: 13px; margin: 0; white-space: pre-wrap; }
+
+/* Editor */
+.editor-box {
+  border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  background: var(--ed-bg); box-shadow: var(--shadow-sm); margin-bottom: 16px;
+}
+.editor-hdr {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 14px; background: var(--surface-alt);
+  border-bottom: 1px solid var(--line); font-size: 13px;
+}
+.file-tab { font-family: var(--font-mono); font-weight: 600; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+.editor-tools { display: flex; align-items: center; gap: 10px; }
+.autosave-pill { font-size: 12px; color: var(--ok); font-weight: 500; display: flex; align-items: center; gap: 4px; }
+.btn-tool {
+  font-size: 12px; font-weight: 600; color: var(--ink-secondary);
+  padding: 3px 8px; border-radius: 5px; border: 1px solid var(--line);
+  background: var(--surface); transition: all 0.15s;
+}
+.btn-tool:hover { border-color: var(--line-focus); color: var(--ink); }
+.editor-box, .gut, textarea, pre, code, kbd {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none !important;
+  font-feature-settings: "calt" 0, "liga" 0, "dlig" 0 !important;
+  -webkit-font-feature-settings: "calt" 0, "liga" 0, "dlig" 0 !important;
+}
+.ed { display: flex; height: 360px; background: var(--ed-bg); }
+.gut {
+  background: var(--gut-bg); color: var(--mut);
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.55;
+  padding: 10px 8px; text-align: right; min-width: 44px; overflow: hidden; user-select: none;
+  border-right: 1px solid var(--line);
+  white-space: pre;
+  font-variant-ligatures: none !important;
+  font-feature-settings: "calt" 0, "liga" 0, "dlig" 0 !important;
+}
+textarea {
+  flex: 1; border: 0; outline: 0; resize: none; background: transparent;
+  color: var(--ed-text, var(--ink)); caret-color: var(--ed-text, var(--ink));
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.55;
+  font-variant-ligatures: none !important;
+  font-feature-settings: "calt" 0, "liga" 0, "dlig" 0 !important;
+  -webkit-font-feature-settings: "calt" 0, "liga" 0, "dlig" 0 !important;
+  padding: 10px 12px; white-space: pre; overflow: auto; tab-size: 4;
+}
+
+/* Action Controls */
+.controls-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.ctrl-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.btn-main {
+  background: var(--pri); color: #fff; font-size: 14px; font-weight: 700;
+  padding: 9px 20px; border-radius: 8px; box-shadow: 0 2px 6px rgb(37 99 235 / 0.35);
+  display: flex; align-items: center; gap: 6px; transition: all 0.15s;
+}
+.btn-main:hover { background: var(--pri-hover); transform: translateY(-1px); }
+.btn-step {
+  font-size: 13px; font-weight: 600; color: var(--ink-secondary);
+  padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface-alt); transition: all 0.15s;
+}
+.btn-step:hover { border-color: var(--line-focus); color: var(--ink); }
+.kbd-hint { font-size: 12px; color: var(--mut); margin-left: 4px; }
+kbd {
+  background: var(--surface-alt); border: 1px solid var(--line);
+  border-radius: 4px; padding: 2px 5px; font-family: var(--font-mono); font-size: 11px;
+}
+
+/* Results */
+.res-card { margin-top: 18px; }
+.sum-banner {
+  padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 700;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.sum-banner.pass { background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok-line); }
+.sum-banner.fail { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad-line); }
+
+.res-table { width: 100%; border-collapse: collapse; font-size: 13px; border-radius: 8px; overflow: hidden; }
+.res-table th, .res-table td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; }
+.res-table th { background: var(--surface-alt); color: var(--mut); font-weight: 600; font-size: 12px; }
+.res-table tr.p td { background: var(--ok-bg); }
+.res-table tr.f td { background: var(--bad-bg); }
+.res-table td pre { font-family: var(--font-mono); font-size: 12px; margin: 0; white-space: pre-wrap; }
+.status-pill {
+  display: inline-block; padding: 2px 8px; border-radius: 12px;
+  font-weight: 700; font-size: 12px; text-align: center;
+}
+.status-pill.p { background: var(--ok); color: #fff; }
+.status-pill.f { background: var(--bad); color: #fff; }
+
+.err-box {
+  background: var(--bad-bg); border: 1px solid var(--bad-line);
+  border-radius: 8px; padding: 12px; margin-top: 12px;
+}
+.err-box-hdr { font-size: 12px; font-weight: 700; color: var(--bad); text-transform: uppercase; margin-bottom: 4px; }
+.err-box pre { font-family: var(--font-mono); font-size: 13px; color: var(--bad); margin: 0; white-space: pre-wrap; }
+
+/* Failed Test Case & Hidden Suite Details */
+.fail-detail-card {
+  background: var(--bad-bg);
+  border: 1px solid var(--bad-line);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+  animation: fadeIn 0.2s ease-in;
+}
+.fail-detail-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--bad);
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.badge-hidden {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--surface);
+  border: 1px solid var(--bad-line);
+  color: var(--bad);
+}
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.diff-col {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+.diff-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--mut);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+.diff-pre {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.diff-pre.ok-text { color: var(--ok); font-weight: 600; }
+.diff-pre.bad-text { color: var(--bad); font-weight: 700; }
+.section-subhdr {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--mut);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 16px 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hidden-summary-bar {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hidden-summary-bar.pass {
+  background: var(--ok-bg);
+  color: var(--ok);
+  border: 1px solid var(--ok-line);
+}
+.hidden-summary-bar.fail {
+  background: var(--bad-bg);
+  color: var(--bad);
+  border: 1px solid var(--bad-line);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cloud Sync Modal */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.65);
+  display: none; align-items: center; justify-content: center;
+  z-index: 9999; backdrop-filter: blur(4px); padding: 16px;
+}
+.modal-overlay.open { display: flex; animation: fadeIn 0.15s ease-out; }
+.modal-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); width: 100%; max-width: 520px;
+  max-height: 90vh; overflow-y: auto; padding: 22px;
+  box-shadow: var(--shadow-lg); color: var(--ink);
+}
+.modal-hdr {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px;
+}
+.modal-title { font-size: 17px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.modal-close {
+  background: none; border: none; font-size: 20px; cursor: pointer;
+  color: var(--mut); line-height: 1; padding: 4px;
+}
+.modal-close:hover { color: var(--ink); }
+.sync-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 99px; font-size: 12px; font-weight: 600;
+  margin-bottom: 14px;
+}
+.sync-badge.ok { background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok-line); }
+.sync-badge.off { background: var(--surface-alt); color: var(--mut); border: 1px solid var(--line); }
+.sync-badge.err { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad-line); }
+.sync-form-grp { margin-bottom: 14px; }
+.sync-form-grp label { display: block; font-size: 12px; font-weight: 600; color: var(--ink-secondary); margin-bottom: 5px; }
+.sync-form-grp input, .sync-form-grp textarea {
+  width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line);
+  background: var(--surface-alt); color: var(--ink); font-family: inherit; font-size: 13px;
+  outline: none; box-sizing: border-box;
+}
+.sync-form-grp textarea { font-family: var(--font-mono); font-size: 11px; resize: vertical; min-height: 85px; }
+.sync-form-grp input:focus, .sync-form-grp textarea:focus { border-color: var(--pri); }
+.sync-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.btn-action-pri {
+  background: var(--pri); color: #fff; font-size: 13px; font-weight: 600;
+  padding: 7px 16px; border-radius: 6px; border: 0; cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-action-pri:hover { background: var(--pri-hover); }
+.btn-action-sec {
+  background: var(--surface-alt); border: 1px solid var(--line);
+  padding: 7px 14px; border-radius: 6px; font-size: 13px; font-weight: 600;
+  color: var(--ink); cursor: pointer; transition: all 0.15s;
+}
+.btn-action-sec:hover { border-color: var(--pri); color: var(--pri); }
+.btn-action-danger {
+  background: var(--bad-bg); border: 1px solid var(--bad-line);
+  padding: 7px 14px; border-radius: 6px; font-size: 13px; font-weight: 600;
+  color: var(--bad); cursor: pointer; transition: all 0.15s;
+}
+.btn-action-danger:hover { background: var(--bad); color: #fff; }
+.sync-guide {
+  background: var(--surface-alt); border: 1px dashed var(--line);
+  border-radius: 8px; padding: 12px 14px; font-size: 12px; color: var(--mut);
+  line-height: 1.5; margin-top: 14px;
+}
+.sync-guide ol { margin-left: 18px; margin-top: 6px; }
+.sync-guide li { margin-bottom: 4px; }
+.sync-guide a { color: var(--pri); text-decoration: underline; font-weight: 500; }
+
+
+/* ---- loading effects ---- */
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:8px}
+button.is-busy{pointer-events:none;opacity:.8}
+.btn-icon.spin{animation:spin 1s linear infinite}
+.sync-badge.busy{background:var(--surface-alt);color:var(--ink-secondary);border:1px solid var(--line)}
+</style></head><body><div class="w">
+<header>
+  <div class="brand">
+    <div class="brand-icon"><img src="favicon.svg" alt="Java" style="width:100%;height:100%;display:block;border-radius:10px;"></div>
+    <div>
+      <h1>Java LeetCode &amp; Thinking Quiz</h1>
+      <div class="brand-sub">100 LeetCode Easy/Medium &amp; Thinking Challenges</div>
+    </div>
+  </div>
+  <div class="hdr-actions">
+    <div class="prog-wrap">
+      <div class="prog-bar-bg"><div id="pbar" class="prog-bar-fill"></div></div>
+      <span id="pstat" class="prog-text">0/100 Solved</span>
+    </div>
+    <a class="btn-icon" href="index.html" title="Back to Quiz Hub" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">🏠</a>
+    <button class="btn-icon" id="cloudBtn" title="Firebase Cloud Sync">☁️</button>
+    <button class="btn-icon" id="expBtn" title="Export my answers (download JSON)">⬇️</button>
+    <button class="btn-icon" id="impBtn" title="Import answers from a JSON file">⬆️</button>
+    <input type="file" id="impFile" accept=".json,application/json" style="display:none">
+    <button class="btn-icon" id="th" title="Toggle Light/Dark Theme">🌙</button>
+  </div>
+</header>
+
+<div class="nav-card">
+  <div class="nav-toolbar">
+    <div class="filter-tabs" id="filters">
+      <button class="tab-btn active" data-f="all">All (100)</button>
+      <button class="tab-btn" data-f="ok">✓ Solved (<span id="cnt-ok">0</span>)</button>
+      <button class="tab-btn" data-f="un">Unsolved (<span id="cnt-un">100</span>)</button>
+      <button class="tab-btn" data-f="star">★ Flagged (<span id="cnt-star">0</span>)</button>
+    </div>
+    <div class="jump-box">
+      <span>Jump to:</span>
+      <input type="number" id="jump-in" min="1" max="100" placeholder="1-100">
+    </div>
+  </div>
+  <div class="nav-grid" id="nav"></div>
+</div>
+
+<div id="app"></div>
+</div>
+
+<!-- Firebase Sync Modal -->
+<div id="cloudModal" class="modal-overlay">
+  <div class="modal-card">
+    <div class="modal-hdr">
+      <div class="modal-title"><span>☁️</span> Firebase Cloud Sync</div>
+      <button class="modal-close" id="cloudCloseBtn" title="Close">&times;</button>
+    </div>
+    <div id="syncStatusBadge" class="sync-badge off">⚪ Not Connected</div>
+    
+    <div class="sync-form-grp">
+      <label>Sync Profile / User ID (e.g. <code>my_quiz</code> or <code>ragul</code>):</label>
+      <input type="text" id="syncProfileInput" placeholder="default" value="default">
+      <small style="color:var(--mut);font-size:11px;display:block;margin-top:3px;">Use this same profile name on other devices to share the exact same progress.</small>
+    </div>
+
+    <div class="sync-form-grp">
+      <label>Paste Firebase Config (JSON or JavaScript code):</label>
+      <textarea id="syncConfigInput" placeholder="const firebaseConfig = {&#10;  apiKey: &quot;...&quot;,&#10;  databaseURL: &quot;https://...firebaseio.com&quot;,&#10;  projectId: &quot;...&quot;&#10;};"></textarea>
+    </div>
+
+    <div class="sync-btn-row">
+      <button class="btn-action-pri" id="syncConnectBtn">Save &amp; Connect</button>
+      <button class="btn-action-sec" id="syncPushBtn" style="display:none;">⬆️ Push Local to Cloud</button>
+      <button class="btn-action-sec" id="syncPullBtn" style="display:none;">⬇️ Pull Cloud to Local</button>
+      <button class="btn-action-danger" id="syncDisconnectBtn" style="display:none;">Disconnect</button>
+    </div>
+
+    <div class="sync-guide">
+      <b>Quick 2-minute Firebase Setup:</b>
+      <ol>
+        <li>Go to <a href="https://console.firebase.google.com" target="_blank" rel="noopener">Firebase Console</a> and click <b>Create a project</b>.</li>
+        <li>In the sidebar, click <b>Build &gt; Realtime Database</b> &rarr; click <b>Create Database</b> (select <i>Start in test mode</i>).</li>
+        <li>Go to <b>Project Settings (⚙️) &gt; General</b> &rarr; under <i>Your apps</i> click Web (<b>&lt;/&gt;</b>) &rarr; copy the <code>firebaseConfig</code> and paste it above!</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script type="text/plain" id="engSrc">
+/* ===== Mini Java runner (subset: primitives, String, Scanner, Math, if/switch/loops, static methods) ===== */
+const V=(t,v)=>({t,v});class JE extends Error{}
+const TY=new Set(['int','long','double','float','char','boolean','byte','short','String','var','StringBuilder','StringBuffer','Arrays']),PRIM=new Set(['int','long','double','float','char','byte','short','boolean']),CL=new Set(['Math','Integer','Long','Double','Character','String','System','Boolean','Byte','Short','Float','StringBuilder','StringBuffer','Arrays']);
+let OUT,IN,IP,steps;const EX=m=>new JE('Exception in thread "main" java.lang.'+m);
+const unesc=s=>s.replace(/\\(u[\da-fA-F]{4}|.)/g,(m,c)=>c.length==5?String.fromCharCode(parseInt(c.slice(1),16)):({n:'\n',t:'\t',r:'\r','0':'\0',b:'\b'}[c]??c));
+function lex(s){const re=/\s+|\/\/[^\n]*|\/\*[\s\S]*?\*\/|("(?:[^"\\\n]|\\.)*")|('(?:[^'\\]|\\[^']*)')|(0[xX][\da-fA-F]+[lL]?|(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?[lLfFdD]?)|([A-Za-z_$][\w$]*)|(>>>=|<<=|>>=|>>>|\+\+|--|&&|\|\||==|!=|<=|>=|[-+*\/%&|^]=|->|<<|>>|[-+*\/%=<>!&|^~?:;,.(){}\[\]])/y,T=[];let i=0;
+while(i<s.length){re.lastIndex=i;const m=re.exec(s);if(!m)throw new JE('error: illegal character near '+s.slice(i,i+8));i=re.lastIndex;
+if(m[1]!=null)T.push({k:'s',v:unesc(m[1].slice(1,-1))});else if(m[2]!=null)T.push({k:'c',v:unesc(m[2].slice(1,-1)).charCodeAt(0)});else if(m[3]!=null)T.push({k:'n',v:m[3]});else if(m[4]!=null)T.push({k:'i',v:m[4]});else if(m[5]!=null)T.push({k:'o',v:m[5]});}
+T.push({k:'e',v:'<eof>'});return T}
+function cast(t,x){let v=x.v,f=x.t;if(t=='boolean'||!PRIM.has(t))return V(t=='boolean'||t=='String'?t:x.t,v);if(t=='double')return V(t,Number(v));if(t=='float')return V(t,Math.fround(Number(v)));
+if(t=='long'){if(typeof v=='bigint')return V(t,v);v=Number(v);if(f=='double'||f=='float')return V(t,isNaN(v)?0n:v>=2**63?(1n<<63n)-1n:v<=-(2**63)?-(1n<<63n):BigInt(Math.trunc(v)));return V(t,BigInt(v))}
+let n;if(typeof v=='bigint')n=Number(BigInt.asIntN(32,v));else if(f=='double'||f=='float')n=isNaN(v)?0:Math.max(-2147483648,Math.min(2147483647,Math.trunc(v)));else n=v|0;
+return V(t,t=='char'?n&65535:t=='byte'?n<<24>>24:t=='short'?n<<16>>16:n)}
+function fd(v){if(isNaN(v))return'NaN';if(!isFinite(v))return v<0?'-Infinity':'Infinity';if(v==0)return Object.is(v,-0)?'-0.0':'0.0';const a=Math.abs(v);if(a>=1e-3&&a<1e7){const s=String(v);return s.includes('.')?s:s+'.0'}let[m,e]=v.toExponential().split('e');if(!m.includes('.'))m+='.0';return m+'E'+e.replace('+','')}
+const ff=v=>{for(let p=1;p<10;p++){const s=Number(v.toPrecision(p));if(Math.fround(s)==v)return fd(s)}return fd(v)};
+const str=x=>x.v===null?'null':x.t=='char'?String.fromCharCode(x.v):x.t=='double'?fd(x.v):x.t=='float'?ff(x.v):(x.t=='StringBuilder'||x.t=='StringBuffer')?x.v.s:String(x.v);
+const F={'+':(x,y)=>x+y,'-':(x,y)=>x-y,'*':(x,y)=>x*y,'/':(x,y)=>x/y,'%':(x,y)=>x%y,'&':(x,y)=>x&y,'|':(x,y)=>x|y,'^':(x,y)=>x^y,'<':(x,y)=>x<y,'>':(x,y)=>x>y,'<=':(x,y)=>x<=y,'>=':(x,y)=>x>=y,'==':(x,y)=>x==y,'!=':(x,y)=>x!=y};
+const CMP=new Set(['<','>','<=','>=','==','!=']);
+function bin(o,a,b){if(o=='+'&&(a.t=='String'||b.t=='String'))return V('String',str(a)+str(b));
+if(a.t=='boolean'||a.t=='String'){const x=a.v,y=b.v;return V('boolean',o=='=='?x===y:o=='!='?x!==y:o=='&'?x&&y:o=='|'?x||y:x!==y)}
+const sh=o=='<<'||o=='>>'||o=='>>>',t=sh?(a.t=='long'?'long':'int'):(a.t=='double'||b.t=='double')?'double':(a.t=='float'||b.t=='float')?'float':(a.t=='long'||b.t=='long')?'long':'int',ct=t=='float'?'double':t,x=cast(ct,a).v;
+if(sh){const n=Number(b.v);if(t=='long'){const k=BigInt(n&63);return V(t,BigInt.asIntN(64,o=='<<'?x<<k:o=='>>'?x>>k:BigInt.asUintN(64,x)>>k))}return V(t,o=='<<'?x<<n:o=='>>'?x>>n:(x>>>n)|0)}
+const y=cast(ct,b).v;if(CMP.has(o))return V('boolean',F[o](x,y));let r;
+if(t=='int'){if(o=='*')r=Math.imul(x,y);else if(o=='/'||o=='%'){if(y===0)throw EX('ArithmeticException: / by zero');r=(o=='/'?x/y:x%y)|0}else r=F[o](x,y)|0}
+else if(t=='long'){if((o=='/'||o=='%')&&y===0n)throw EX('ArithmeticException: / by zero');r=BigInt.asIntN(64,F[o](x,y))}
+else{r=F[o](x,y);if(t=='float')r=Math.fround(r)}return V(t,r)}
+function fmt(f,a){let i=0;return f.replace(/%([-0+, ]*)(\d+)?(?:\.(\d+))?([dsfcbxXne%])/g,(m,fl,w,pr,c)=>{if(c=='n')return'\n';if(c=='%')return'%';const x=a[i++];let s;
+if(c=='d'){s=String(x.v);if(fl.includes(','))s=s.replace(/\B(?=(\d{3})+(?!\d))/g,',');if(fl.includes('+')&&x.v>=0)s='+'+s}
+else if(c=='f'){s=Number(x.v).toFixed(pr==null?6:+pr);if(fl.includes('+')&&x.v>=0)s='+'+s}
+else if(c=='x'||c=='X'){s=(x.t=='long'?BigInt.asUintN(64,x.v):x.v>>>0).toString(16);if(c=='X')s=s.toUpperCase()}
+else if(c=='e')s=Number(x.v).toExponential(pr==null?6:+pr).replace(/e([+-])(\d)$/,'e$10$2');else s=str(x);
+if(c=='s'&&pr!=null)s=s.slice(0,+pr);
+if(w){const n=+w;if(fl.includes('-'))s=s.padEnd(n);else if(fl.includes('0')&&c!='s'){const g=/^[+-]/.test(s)?s[0]:'';s=g+s.slice(g.length).padStart(n-g.length,'0')}else s=s.padStart(n)}return s})}
+const N=x=>Number(x.v),m1=f=>a=>V('double',f(N(a[0]))),pt=(a,b)=>bin('+',V(a.t,a.t=='long'?0n:0),V(b.t,b.t=='long'?0n:0)).t;
+const C={'Byte.MIN_VALUE':V('byte',-128),'Byte.MAX_VALUE':V('byte',127),'Byte.BYTES':V('int',1),'Byte.SIZE':V('int',8),'Short.MIN_VALUE':V('short',-32768),'Short.MAX_VALUE':V('short',32767),'Short.BYTES':V('int',2),'Short.SIZE':V('int',16),'Integer.MAX_VALUE':V('int',2147483647),'Integer.MIN_VALUE':V('int',-2147483648),'Integer.BYTES':V('int',4),'Integer.SIZE':V('int',32),'Long.MAX_VALUE':V('long',(1n<<63n)-1n),'Long.MIN_VALUE':V('long',-(1n<<63n)),'Long.BYTES':V('int',8),'Long.SIZE':V('int',64),'Float.MIN_VALUE':V('float',1.4e-45),'Float.MAX_VALUE':V('float',3.4028235e38),'Float.BYTES':V('int',4),'Float.SIZE':V('int',32),'Double.MIN_VALUE':V('double',4.9e-324),'Double.MAX_VALUE':V('double',Number.MAX_VALUE),'Double.BYTES':V('int',8),'Double.SIZE':V('int',64),'Character.MIN_VALUE':V('char',0),'Character.MAX_VALUE':V('char',65535),'Character.BYTES':V('int',2),'Character.SIZE':V('int',16),'Boolean.TRUE':V('boolean',true),'Boolean.FALSE':V('boolean',false),'Math.PI':V('double',Math.PI),'Math.E':V('double',Math.E),'System.in':V('class','System.in')};
+const out=s=>{OUT+=s;if(OUT.length>2e5)throw new JE('Output limit exceeded')};
+const pNum=(a,max)=>{const r=a.length>1?N(a[1]):10,s=String(a[0].v).trim();if(r<2||r>36||!s)throw EX('NumberFormatException');let neg=s[0]=='-',i=(neg||s[0]=='+')?1:0,res=0n,br=BigInt(r);if(i>=s.length)throw EX('NumberFormatException');for(;i<s.length;i++){const d=parseInt(s[i],r);if(isNaN(d))throw EX('NumberFormatException');res=res*br+BigInt(d)}res=neg?-res:res;if(res<-(max+1n)||res>max)throw EX('NumberFormatException');return res},pInt=a=>Number(pNum(a,2147483647n)),pLong=a=>pNum(a,9223372036854775807n);
+const S={'System.out.println':a=>out((a.length?str(a[0]):'')+'\n'),'System.out.print':a=>out(str(a[0])),'System.out.printf':a=>out(fmt(a[0].v,a.slice(1))),'String.format':a=>V('String',fmt(a[0].v,a.slice(1))),'String.valueOf':a=>V('String',str(a[0])),
+'Math.sqrt':m1(Math.sqrt),'Math.cbrt':m1(Math.cbrt),'Math.floor':m1(Math.floor),'Math.ceil':m1(Math.ceil),'Math.sin':m1(Math.sin),'Math.cos':m1(Math.cos),'Math.tan':m1(Math.tan),'Math.log':m1(Math.log),'Math.log10':m1(Math.log10),'Math.exp':m1(Math.exp),'Math.signum':m1(Math.sign),'Math.toRadians':m1(x=>x/180*Math.PI),'Math.toDegrees':m1(x=>x*180/Math.PI),
+'Math.pow':a=>V('double',Math.pow(N(a[0]),N(a[1]))),'Math.hypot':a=>V('double',Math.hypot(N(a[0]),N(a[1]))),'Math.round':a=>V(a[0].t=='float'?'int':'long',a[0].t=='float'?Math.floor(N(a[0])+.5)|0:BigInt(Math.floor(N(a[0])+.5))),
+'Math.abs':a=>{const x=a[0];return x.t=='long'?V('long',x.v<0n?-x.v:x.v):x.t=='double'||x.t=='float'?V(x.t,Math.abs(x.v)):V('int',Math.abs(x.v)|0)},
+'Math.max':a=>{const t=pt(a[0],a[1]),x=cast(t,a[0]),y=cast(t,a[1]);return x.v>=y.v?x:y},'Math.min':a=>{const t=pt(a[0],a[1]),x=cast(t,a[0]),y=cast(t,a[1]);return x.v<=y.v?x:y},
+'Math.floorMod':a=>{const y=bin('%',a[0],a[1]);return y.v!=0&&(y.v<0)!=(a[1].v<0)?bin('+',y,a[1]):y},'Math.floorDiv':a=>{const q=bin('/',a[0],a[1]),r=bin('%',a[0],a[1]);return r.v!=0&&(r.v<0)!=(a[1].v<0)?bin('-',q,V('int',1)):q},
+'Byte.parseByte':a=>V('byte',pInt(a)<<24>>24),'Byte.valueOf':a=>V('byte',pInt(a)<<24>>24),'Short.parseShort':a=>V('short',pInt(a)<<16>>16),'Short.valueOf':a=>V('short',pInt(a)<<16>>16),'Float.parseFloat':a=>V('float',Math.fround(parseFloat(a[0].v))),'Float.valueOf':a=>V('float',Math.fround(parseFloat(a[0].v))),'Double.valueOf':a=>V('double',parseFloat(a[0].v)),'Long.valueOf':a=>V('long',pLong(a)),'Boolean.parseBoolean':a=>V('boolean',String(a[0].v).toLowerCase()=='true'),'Boolean.valueOf':a=>V('boolean',String(a[0].v).toLowerCase()=='true'),'Integer.parseInt':a=>V('int',pInt(a)|0),'Integer.valueOf':a=>V('int',pInt(a)|0),'Long.parseLong':a=>V('long',pLong(a)),'Double.parseDouble':a=>V('double',parseFloat(a[0].v)),
+'Integer.toString':a=>V('String',a.length>1?Number(a[0].v).toString(N(a[1])):String(a[0].v)),'Long.toString':a=>V('String',a.length>1?BigInt(a[0].v).toString(N(a[1])):String(a[0].v)),'Double.toString':a=>V('String',String(a[0].v)),'Float.toString':a=>V('String',String(a[0].v)),'Boolean.toString':a=>V('String',String(a[0].v)),'Character.toString':a=>V('String',String.fromCharCode(a[0].v)),'Integer.toBinaryString':a=>V('String',(a[0].v>>>0).toString(2)),'Integer.toHexString':a=>V('String',(a[0].v>>>0).toString(16)),'Integer.bitCount':a=>V('int',(a[0].v>>>0).toString(2).replace(/0/g,'').length),'Integer.compare':a=>V('int',Math.sign(a[0].v-a[1].v)),
+'Character.isDigit':a=>V('boolean',/\d/.test(String.fromCharCode(a[0].v))),'Character.isLetter':a=>V('boolean',/[A-Za-z]/.test(String.fromCharCode(a[0].v))),'Character.isUpperCase':a=>V('boolean',/[A-Z]/.test(String.fromCharCode(a[0].v))),'Character.isLowerCase':a=>V('boolean',/[a-z]/.test(String.fromCharCode(a[0].v))),
+'Character.toUpperCase':a=>V('char',String.fromCharCode(a[0].v).toUpperCase().charCodeAt(0)),'Character.toLowerCase':a=>V('char',String.fromCharCode(a[0].v).toLowerCase().charCodeAt(0)),'Character.getNumericValue':a=>V('int',parseInt(String.fromCharCode(a[0].v),36)),'Arrays.sort':a=>{if(a[0]&&Array.isArray(a[0].v))a[0].v.sort((x,y)=>typeof x==='bigint'?(x<y?-1:x>y?1:0):typeof x==='string'?(x<y?-1:x>y?1:0):x-y);return V('void',0)},'Arrays.fill':a=>{if(a[0]&&Array.isArray(a[0].v))a[0].v.fill(a[1].v);return V('void',0)}};
+const sv=x=>x.t=='char'?String.fromCharCode(x.v):x.v,B=x=>V('boolean',x),SM={length:s=>V('int',s.length),charAt:(s,a)=>{const i=N(a[0]);if(i<0||i>=s.length)throw EX('StringIndexOutOfBoundsException');return V('char',s.charCodeAt(i))},substring:(s,a)=>V('String',s.substring(N(a[0]),a[1]&&N(a[1]))),toUpperCase:s=>V('String',s.toUpperCase()),toLowerCase:s=>V('String',s.toLowerCase()),trim:s=>V('String',s.trim()),equals:(s,a)=>B(s===a[0].v),equalsIgnoreCase:(s,a)=>B(s.toLowerCase()===a[0].v.toLowerCase()),indexOf:(s,a)=>V('int',s.indexOf(sv(a[0]))),lastIndexOf:(s,a)=>V('int',s.lastIndexOf(sv(a[0]))),replace:(s,a)=>V('String',s.replaceAll(a[0].v,a[1].v)),replaceAll:(s,a)=>V('String',s.replaceAll(a[0].v,a[1].v)),contains:(s,a)=>B(s.includes(a[0].v)),isEmpty:s=>B(!s),startsWith:(s,a)=>B(s.startsWith(a[0].v)),endsWith:(s,a)=>B(s.endsWith(a[0].v)),repeat:(s,a)=>V('String',s.repeat(N(a[0]))),concat:(s,a)=>V('String',s+a[0].v)};
+class SB{constructor(s=''){this.s=String(s)}toString(){return this.s}}
+const SBM={append:(o,a)=>{if(a.length>=3)o.v.s+=str(a[0]).substring(N(a[1]),N(a[1])+N(a[2]));else if(a.length>0)o.v.s+=(a[0].v===null?'null':str(a[0]));return o},toString:o=>V('String',o.v.s),length:o=>V('int',o.v.s.length),charAt:(o,a)=>{const i=N(a[0]);if(i<0||i>=o.v.s.length)throw EX('StringIndexOutOfBoundsException');return V('char',o.v.s.charCodeAt(i))},setCharAt:(o,a)=>{const i=N(a[0]);if(i<0||i>=o.v.s.length)throw EX('StringIndexOutOfBoundsException');const ch=String.fromCharCode(a[1].v);o.v.s=o.v.s.slice(0,i)+ch+o.v.s.slice(i+1);return V('void',0)},reverse:o=>{o.v.s=[...o.v.s].reverse().join('');return o},delete:(o,a)=>{const start=N(a[0]),end=Math.min(N(a[1]),o.v.s.length);if(start<0||start>o.v.s.length||start>end)throw EX('StringIndexOutOfBoundsException');o.v.s=o.v.s.slice(0,start)+o.v.s.slice(end);return o},deleteCharAt:(o,a)=>{const i=N(a[0]);if(i<0||i>=o.v.s.length)throw EX('StringIndexOutOfBoundsException');o.v.s=o.v.s.slice(0,i)+o.v.s.slice(i+1);return o},insert:(o,a)=>{const i=N(a[0]);if(i<0||i>o.v.s.length)throw EX('StringIndexOutOfBoundsException');const ins=(a[1].v===null?'null':str(a[1]));o.v.s=o.v.s.slice(0,i)+ins+o.v.s.slice(i);return o},replace:(o,a)=>{const start=N(a[0]),end=Math.min(N(a[1]),o.v.s.length);if(start<0||start>o.v.s.length||start>end)throw EX('StringIndexOutOfBoundsException');const rep=str(a[2]);o.v.s=o.v.s.slice(0,start)+rep+o.v.s.slice(end);return o},substring:(o,a)=>{const start=N(a[0]),end=a[1]?N(a[1]):o.v.s.length;if(start<0||end>o.v.s.length||start>end)throw EX('StringIndexOutOfBoundsException');return V('String',o.v.s.substring(start,end))},indexOf:(o,a)=>V('int',o.v.s.indexOf(sv(a[0]),a[1]?N(a[1]):0)),lastIndexOf:(o,a)=>V('int',o.v.s.lastIndexOf(sv(a[0]),a[1]?N(a[1]):o.v.s.length)),setLength:(o,a)=>{const len=N(a[0]);if(len<0)throw EX('IndexOutOfBoundsException');if(len<o.v.s.length)o.v.s=o.v.s.slice(0,len);else if(len>o.v.s.length)o.v.s=o.v.s.padEnd(len,'\0');return V('void',0)},isEmpty:o=>B(o.v.s.length===0),capacity:o=>V('int',Math.max(16,o.v.s.length+16))};
+function scan(n){const tok=()=>{const m=/^\s*(\S+)/.exec(IN.slice(IP));if(!m)throw EX('NoSuchElementException'.replace('','util.'));IP+=m[0].length;return m[1]},bad=()=>EX('InputMismatchException');
+switch(n){case'next':return V('String',tok());case'nextByte':return V('byte',tok()|0);case'nextShort':return V('short',tok()|0);case'nextInt':{const t=tok(),v=Number(t);if(!/^[-+]?\d+$/.test(t)||Math.abs(v)>2147483648)throw bad();return V('int',v|0)}
+case'nextLong':{const t=tok();if(!/^[-+]?\d+$/.test(t))throw bad();return V('long',BigInt(t))}case'nextDouble':case'nextFloat':{const t=tok();if(isNaN(+t))throw bad();return V(n=='nextFloat'?'float':'double',n=='nextFloat'?Math.fround(+t):+t)}
+case'nextBoolean':return V('boolean',tok().toLowerCase()=='true');
+case'nextLine':{if(IP>=IN.length)throw EX('NoSuchElementException');const i=IN.indexOf('\n',IP),l=i<0?IN.slice(IP):IN.slice(IP,i);IP=i<0?IN.length:i+1;return V('String',l.replace(/\r$/,''))}
+case'hasNext':return B(/\S/.test(IN.slice(IP)));case'hasNextInt':return B(/^\s*[-+]?\d+(\s|$)/.test(IN.slice(IP)));case'hasNextLong':return B(/^\s*[-+]?\d+(\s|$)/.test(IN.slice(IP)));case'hasNextLine':return B(IP<IN.length);case'close':return V('void',0)}throw new JE('cannot find symbol: Scanner.'+n)}
+function call(o,n,a){if(o.t=='class'){const f=S[o.v+'.'+n];if(!f)throw new JE('cannot find symbol: '+o.v+'.'+n);return f(a)}
+if(o.t=='String'&&SM[n])return SM[n](o.v,a);if((o.t=='StringBuilder'||o.t=='StringBuffer')&&SBM[n])return SBM[n](o,a);if(o.t=='Scanner')return scan(n);throw new JE('cannot find symbol: method '+n)}
+const isTy=t=>t.k=='i'&&(TY.has(t.v)||/^[A-Z]/.test(t.v));
+const tick=()=>{if(++steps>1.5e6)throw new JE('Time limit exceeded (possible infinite loop)')};
+function compile(src){const T=lex(src);let p=0,depth=0;const M={},G={m:new Map(),p:null},inits=[];
+const pk=()=>T[p],nx=()=>T[p++],is=v=>T[p].v===v&&T[p].k!='s'&&T[p].k!='c',eat=v=>is(v)?(p++,true):false,ex=v=>{if(!eat(v))throw new JE('error: expected '+v+' but found '+T[p].v)},sc0=p=>({m:new Map(),p}),find=(s,n)=>{for(;s;s=s.p)if(s.m.has(n))return s.m.get(n)};
+const PR={'||':1,'&&':2,'|':3,'^':4,'&':5,'==':6,'!=':6,'<':7,'>':7,'<=':7,'>=':7,'<<':8,'>>':8,'>>>':8,'+':9,'-':9,'*':10,'/':10,'%':10};
+function expr(){const l=tern(),t=pk();if(t.k=='o'&&(t.v=='='||/^(?:[-+*\/%&|^]|<<|>>>?)=$/.test(t.v))){nx();const r=expr(),op=t.v.slice(0,-1);
+let fn;if(l.arr&&l.idx){fn=s=>{const arr=l.arr(s);if(!arr||!Array.isArray(arr.v))throw EX('NullPointerException');const i=N(l.idx(s));if(i<0||i>=arr.v.length)throw EX('ArrayIndexOutOfBoundsException: Index '+i+' out of bounds for length '+arr.v.length);const elemTy=arr.t&&arr.t.endsWith('[]')?arr.t.slice(0,-2):'int';const oldVal=V(elemTy,arr.v[i]);const newVal=op?bin(op,oldVal,r(s)):r(s);arr.v[i]=cast(elemTy,newVal).v;return V(elemTy,arr.v[i])}}else{const n=l.id;if(!n)throw new JE('error: unexpected type, required: variable');fn=s=>{const c=find(s,n);if(!c)throw new JE('cannot find symbol: '+n);c.v=cast(c.t,op?bin(op,V(c.t,c.v),r(s)):r(s)).v;return V(c.t,c.v)}}fn.isStmt=true;return fn}return l}
+function tern(){const c=bn(1);if(eat('?')){const a=expr();ex(':');const b=tern();return s=>c(s).v?a(s):b(s)}return c}
+function bn(min){let l=un();for(;;){const t=pk(),pr=t.k=='o'?PR[t.v]:0;if(!pr||pr<min)return l;nx();const r=bn(pr+1),o=t.v,a=l;l=o=='&&'?s=>V('boolean',a(s).v&&r(s).v):o=='||'?s=>V('boolean',a(s).v||r(s).v):s=>bin(o,a(s),r(s))}}
+const incrArr=(acc,o,pre)=>{const fn=s=>{const arr=acc.arr(s);if(!arr||!Array.isArray(arr.v))throw EX('NullPointerException');const i=N(acc.idx(s));if(i<0||i>=arr.v.length)throw EX('ArrayIndexOutOfBoundsException: Index '+i+' out of bounds for length '+arr.v.length);const elemTy=arr.t&&arr.t.endsWith('[]')?arr.t.slice(0,-2):'int';const old=V(elemTy,arr.v[i]);const newVal=cast(elemTy,bin(o,old,V('int',1)));arr.v[i]=newVal.v;return pre?newVal:old};fn.isStmt=true;return fn};
+const incr=(n,o,pre)=>{const fn=s=>{const c=find(s,n),old=V(c.t,c.v);c.v=cast(c.t,bin(o,old,V('int',1))).v;return pre?V(c.t,c.v):old};fn.isStmt=true;return fn};
+function un(){const t=pk();if(t.k=='o'){const v=t.v;
+if(v=='-'||v=='+'||v=='!'||v=='~'){nx();const a=un();return v=='!'?s=>V('boolean',!a(s).v):v=='-'?s=>bin('-',V('int',0),a(s)):v=='+'?s=>bin('+',V('int',0),a(s)):s=>bin('^',a(s),V('int',-1))}
+if(v=='++'||v=='--'){nx();const a=un();return (a.arr&&a.idx)?incrArr(a,v[0],true):incr(a.id,v[0],true)}
+if(v=='('&&T[p+1].k=='i'&&PRIM.has(T[p+1].v)&&T[p+2].v==')'){const ty=T[p+1].v;p+=3;const a=un();return s=>cast(ty,a(s))}}return pf()}
+function args(){const a=[];if(!eat(')')){do a.push(expr());while(eat(','));ex(')')}return a}
+function pf(){let e=pr();for(;;){if(is('.')){nx();const n=nx().v,b=e;if(eat('(')){const a=args();e=s=>call(b(s),n,a.map(f=>f(s)));e.isStmt=true}else e=s=>{const o=b(s);if(o&&Array.isArray(o.v)&&n=='length')return V('int',o.v.length);if(o.t=='class'){const k=o.v+'.'+n;return C[k]||V('class',k)}throw new JE('cannot find symbol: '+n)}}
+else if(is('[')){nx();const idx=expr();ex(']');const b=e;const acc=s=>{const o=b(s);if(!o||!Array.isArray(o.v))throw EX('NullPointerException');const i=N(idx(s));if(i<0||i>=o.v.length)throw EX('ArrayIndexOutOfBoundsException: Index '+i+' out of bounds for length '+o.v.length);const elemTy=o.t&&o.t.endsWith('[]')?o.t.slice(0,-2):'int';return V(elemTy,o.v[i])};acc.arr=b;acc.idx=idx;e=acc}
+else if(is('++')||is('--')){const o=nx().v[0];e=(e.arr&&e.idx)?incrArr(e,o,false):incr(e.id,o,false)}else return e}}
+function pr(){const t=nx(),w=x=>()=>x;
+if(t.k=='n'){const q=t.v;if(/^0[xX]/.test(q)){const l=/[lL]$/.test(q),n=parseInt(q.replace(/[lL]$/,''),16);return w(l?V('long',BigInt(n)):V('int',n|0))}
+const l=/[lL]$/.test(q),f=/[fF]$/.test(q),d=/[dD]$/.test(q),n=q.replace(/[lLfFdD]$/,'');return w(l?V('long',BigInt(n)):f?V('float',Math.fround(+n)):(d||/[.eE]/.test(n))?V('double',+n):V('int',+n|0))}
+if(t.k=='s')return w(V('String',t.v));if(t.k=='c')return w(V('char',t.v));
+if(t.v=='('){const e=expr();ex(')');return e}if(t.v=='true'||t.v=='false')return w(V('boolean',t.v=='true'));
+if(t.v=='new'){const n=nx().v;if(is('[')){const dims=[];while(eat('[')){if(is(']')){dims.push(null);ex(']')}else{dims.push(expr());ex(']')}}let lit=null;if(is('{'))lit=arrayLit(n+'[]');const arrType=n+'[]'.repeat(dims.length);return s=>{if(lit)return lit(s);const mk=(di)=>{const sz=N(dims[di](s));if(di===dims.length-1||!dims[di+1]){const def=n=='boolean'?false:n=='char'?0:n=='long'?0n:(n=='double'||n=='float')?0:(n=='String'||CL.has(n)||dims.length-1-di>0)?null:0;const arr=new Array(sz);for(let i=0;i<sz;i++)arr[i]=def;return arr;}const arr=new Array(sz);for(let i=0;i<sz;i++)arr[i]=mk(di+1);return arr;};return V(arrType,mk(0));}}
+ex('(');const a=args();if(n=='Scanner')return w(V('Scanner',{}));if(n=='String')return s=>{const av=a.map(f=>f(s));if(av.length===0)return V('String','');const x=av[0];if(x===undefined||x===null||x.v===null)return V('String','null');if(av.length>=3&&Array.isArray(x.v)){const offset=N(av[1]),count=N(av[2]);return V('String',x.v.slice(offset,offset+count).map(c=>typeof c==='number'?String.fromCharCode(c):c).join(''));}if(Array.isArray(x.v))return V('String',x.v.map(c=>typeof c==='number'?String.fromCharCode(c):c).join(''));return V('String',str(x));};if(n=='StringBuilder'||n=='StringBuffer')return s=>{const av=a.map(f=>f(s));let init='';if(av.length>0&&av[0]){const x=av[0];if(x.t=='String'||x.t=='StringBuilder'||x.t=='StringBuffer')init=str(x);else if(x.t=='char')init=String.fromCharCode(x.v);}return V(n,new SB(init));};if(n=='Integer')return s=>cast('int',a[0]?a[0](s):V('int',0));if(n=='Long')return s=>cast('long',a[0]?a[0](s):V('long',0n));if(n=='Double')return s=>cast('double',a[0]?a[0](s):V('double',0));if(n=='Float')return s=>cast('float',a[0]?a[0](s):V('float',0));if(n=='Byte')return s=>cast('byte',a[0]?a[0](s):V('byte',0));if(n=='Short')return s=>cast('short',a[0]?a[0](s):V('short',0));if(n=='Character')return s=>cast('char',a[0]?a[0](s):V('char',0));if(n=='Boolean')return s=>cast('boolean',a[0]?a[0](s):V('boolean',false));throw new JE('error: unsupported class '+n);}
+if(t.v=='switch'){const f=swc();return s=>f(s).v}
+if(t.k=='i'){const n=t.v;if(eat('(')){const a=args();const fn=s=>callM(n,a.map(f=>f(s)));fn.isStmt=true;return fn}
+const f=s=>{const c=find(s,n);if(c)return V(c.t,c.v);if(CL.has(n))return V('class',n);throw new JE('cannot find symbol: variable '+n)};f.id=n;return f}
+throw new JE('error: illegal start of expression: '+t.v)}
+function callM(n,a){const m=M[n];if(!m)throw new JE('cannot find symbol: method '+n);if(++depth>1200)throw EX('StackOverflowError');const s=sc0(G);m.ps.forEach((q,i)=>s.m.set(q[1],cast(q[0],a[i])));const r=m.body(s);depth--;return r&&r.k=='r'&&r.v&&m.rt!='void'?cast(m.rt,r.v):V('void',0)}
+function el(){const L=[expr()];while(eat(','))L.push(expr());return s=>{L.forEach(f=>f(s))}}
+function isTypeStart(idx){if(!T[idx]||!isTy(T[idx]))return false;let j=idx+1;while(T[j]&&T[j].v==='['&&T[j+1]&&T[j+1].v===']')j+=2;return T[j]&&T[j].k==='i'}
+function defVal(ty){if(ty.endsWith('[]'))return V(ty,null);if(ty=='boolean')return V('boolean',false);if(ty=='String')return V('String',null);if(ty=='long')return V('long',0n);return V(ty,0)}
+function arrayLit(ty){ex('{');const items=[];if(!is('}')){do{if(is('}'))break;items.push(expr())}while(eat(','))}ex('}');const elemTy=ty&&ty.endsWith('[]')?ty.slice(0,-2):'int';return s=>V(ty||elemTy+'[]',items.map(f=>cast(elemTy,f(s)).v))}
+function decl(){let baseTy=nx().v;while(eat('[')){ex(']');baseTy+='[]'}const D=[];do{let n=nx().v,ty=baseTy;while(eat('[')){ex(']');ty+='[]'}let init=null;if(eat('=')){init=is('{')?arrayLit(ty):expr()}D.push([n,ty,init])}while(eat(','));return s=>{for(const[n,ty,e]of D)s.m.set(n,e?(ty=='var'?(v=>V(v.t,v.v))(e(s)):cast(ty,e(s))):defVal(ty))}}
+function block(){ex('{');const L=[];while(!is('}'))L.push(stmt());ex('}');return s=>{const q=sc0(s);for(const f of L){const r=f(q);if(r)return r}}}
+function swc(){ex('(');const e=expr();ex(')');ex('{');const K=[];let ar=false;
+while(!eat('}')){let lb;if(eat('default'))lb=null;else{ex('case');lb=[tern()];while(eat(','))lb.push(tern())}
+if(eat('->')){ar=true;let b;if(is('{'))b=block();else{const x=expr();ex(';');b=s=>({k:'v',v:x(s)})}K.push({lb,b})}
+else{ex(':');const L=[];while(!is('case')&&!is('default')&&!is('}'))L.push(stmt());K.push({lb,L})}}
+return s=>{const v=e(s);let i=K.findIndex(c=>c.lb&&c.lb.some(f=>{const w=f(s);return v.t=='String'?w.v===v.v:w.v==v.v}));if(i<0)i=K.findIndex(c=>!c.lb);if(i<0)return{};const q=sc0(s),fx=r=>r&&r.k=='b'&&!r.l?undefined:r;
+if(ar){const r=K[i].b(q);return r&&r.k=='v'?{v:r.v}:{s:fx(r)}}
+for(;i<K.length;i++)for(const f of K[i].L){const r=f(q);if(r)return{s:fx(r)}}return{}}}
+function stmt(lb){const t=pk();if(is('{'))return block();if(eat(';'))return()=>{};
+if(t.k=='i'){const v=t.v;
+if(T[p+1].v==':'&&T[p+1].k=='o'&&v!='default'&&v!='case'){p+=2;return stmt(v)}
+if(v=='final'){nx();return stmt()}
+if(v=='if'){nx();ex('(');const c=expr();ex(')');const a=stmt(),b=eat('else')?stmt():null;return s=>c(s).v?a(s):b&&b(s)}
+if(v=='while'){nx();ex('(');const c=expr();ex(')');const b=stmt();return s=>{for(;c(s).v;){tick();const r=b(s);if(r){if(r.k=='r'||(r.l&&r.l!==lb))return r;if(r.k=='b')break}}}}
+if(v=='do'){nx();const b=stmt();ex('while');ex('(');const c=expr();ex(')');ex(';');return s=>{do{tick();const r=b(s);if(r){if(r.k=='r'||(r.l&&r.l!==lb))return r;if(r.k=='b')break}}while(c(s).v)}}
+if(v=='for'){nx();ex('(');let ini=null;if(!eat(';')){ini=isTypeStart(p)?decl():el();ex(';')}const c=is(';')?null:expr();ex(';');const u=is(')')?null:el();ex(')');const b=stmt();
+return s=>{const q=sc0(s);ini&&ini(q);for(;!c||c(q).v;u&&u(q)){tick();const r=b(sc0(q));if(r){if(r.k=='r'||(r.l&&r.l!==lb))return r;if(r.k=='b')break}}}}
+if(v=='break'||v=='continue'){nx();const l=pk().k=='i'?nx().v:null;ex(';');const k=v[0];return()=>({k,l})}
+if(v=='return'){nx();const e=is(';')?null:expr();ex(';');return s=>({k:'r',v:e?e(s):null})}
+if(v=='switch'){nx();const f=swc();return s=>f(s).s}
+if(isTypeStart(p)){const d=decl();ex(';');return d}}
+const e=expr();ex(';');if(!e.isStmt)throw new JE('error: not a statement');return s=>{e(s)}}
+while(pk().k!='e'){const k=pk().v;if(['public','private','protected','static','final','abstract'].includes(k)){nx();continue}if(k=='class'){nx();nx();ex('{');continue}if(k=='import'){while(!eat(';'))nx();continue}if(k=='}'){nx();continue}
+const st=p;let rt=nx().v;while(eat('[')){ex(']');rt+='[]'}const name=nx().v;
+if(eat('(')){const ps=[];while(!eat(')')){let ty=nx().v;while(eat('[')){ex(']');ty+='[]'}let pn=nx().v;while(eat('[')){ex(']');ty+='[]'}ps.push([ty,pn]);eat(',')}M[name]={ps,rt,body:block()}}else{p=st;const d=decl();ex(';');inits.push(d)}}
+return()=>{G.m.clear();OUT='';steps=0;depth=0;inits.forEach(f=>f(G));if(!M.main)throw new JE('error: no main method found');M.main.body(sc0(G))}}
+let _cachedSrc='', _cachedProg=null;
+function runJava(src,inp){
+  OUT='';IN=inp;IP=0;
+  try{
+    if(_cachedSrc!==src){_cachedSrc=src;_cachedProg=compile(src);}
+    _cachedProg();
+    return{out:OUT};
+  }catch(e){
+    if(!(_cachedSrc===src && !(e instanceof JE && typeof e.message==='string' && e.message.startsWith('error:')))){
+      _cachedSrc='';_cachedProg=null;
+    }
+    if(e instanceof JE)return{out:OUT,err:e.message};
+    if(e instanceof RangeError)return{out:OUT,err:'Exception in thread "main" java.lang.StackOverflowError'};
+    return{out:OUT,err:'Internal error: '+e.message};
+  }
+}
+</script>
+<script>
+/* ===== Java runner now lives in a Web Worker (see #engSrc) so the UI never freezes ===== */
+const ENG_SRC=document.getElementById('engSrc').textContent;
+const Runner=(()=>{
+  const GLUE=`
+function __one(st,code,inp){
+  if(st.ce)return st.ce;
+  if(st.tle>=2)return{out:'',err:'Time limit exceeded (possible infinite loop)'};
+  const r=runJava(code,inp);
+  if(r.err){if(r.err.indexOf('error:')===0)st.ce=r;else if(r.err.indexOf('Time limit')===0)st.tle++}
+  return r}
+`;
+  const WSRC=ENG_SRC+GLUE+`
+onmessage=function(e){const d=e.data,st={ce:null,tle:0};postMessage({id:d.id,res:d.inputs.map(function(i){return __one(st,d.code,i)})})};`;
+  const TLE=n=>Array.from({length:n},()=>({out:'',err:'Time limit exceeded (possible infinite loop)'}));
+  let worker=null,seq=0,syncFn=null;const pending=new Map();
+  function getWorker(){
+    if(worker)return worker;
+    try{
+      const url=URL.createObjectURL(new Blob([WSRC],{type:'text/javascript'}));
+      const w=new Worker(url);
+      w.onmessage=e=>{const p=pending.get(e.data.id);if(p){pending.delete(e.data.id);clearTimeout(p.t);p.resolve(e.data.res)}};
+      w.onerror=ev=>{ev.preventDefault&&ev.preventDefault();worker=null;try{w.terminate()}catch(_){}
+        const all=[...pending.values()];pending.clear();all.forEach(p=>{clearTimeout(p.t);runSync(p.code,p.inputs).then(p.resolve)})};
+      worker=w;return w;
+    }catch(err){worker=null;return null}
+  }
+  /* Fallback (no Worker support): run on main thread but yield between slices */
+  function runSync(code,inputs){
+    return new Promise(resolve=>{
+      if(!syncFn)syncFn=new Function(ENG_SRC+GLUE+';return __one;')();
+      const st={ce:null,tle:0},res=[];let k=0;
+      const step=()=>{const t0=performance.now();
+        while(k<inputs.length&&performance.now()-t0<25){res.push(syncFn(st,code,inputs[k++]))}
+        if(k<inputs.length)setTimeout(step,0);else resolve(res)};
+      step();
+    });
+  }
+  function run(code,inputs){
+    const w=getWorker();
+    if(!w)return runSync(code,inputs);
+    return new Promise(resolve=>{
+      const id=++seq;
+      /* watchdog: if the worker is truly stuck, kill it and report a timeout */
+      const t=setTimeout(()=>{pending.delete(id);try{w.terminate()}catch(_){}if(worker===w)worker=null;resolve(TLE(inputs.length))},20000);
+      pending.set(id,{resolve,t,code,inputs});
+      w.postMessage({id,code,inputs});
+    });
+  }
+  return{run};
+})();
+const runAll=(code,inputs)=>Runner.run(code,inputs);
+
+/* ===== Questions: [topic, statement, [[input, expected output], ...]] (first test is shown as the example) ===== */
+const Q=[["Datatypes · Easy","Read two 32-bit ints a and b (anywhere in [Integer.MIN_VALUE, Integer.MAX_VALUE]). Print their exact integer average truncated toward zero (a + b) / 2 without overflowing 32-bit arithmetic.",[["2000000000 2000000000","2000000000"],["2147483647 2147483647","2147483647"],["-2147483648 -2147483648","-2147483648"],["2147483647 -2147483648","0"],["-5 2","-1"],["5 -2","1"],["0 0","0"],["1 2","1"],["-1 -2","-1"],["1000000001 1000000002","1000000001"],["-2147483647 -2147483647","-2147483647"],["42 58","50"]]],["Datatypes · Easy","Read four octets a, b, c, d (each 0 to 255). Pack them into a single signed 32-bit int ((a << 24) | (b << 16) | (c << 8) | d) and print that int on line 1, then print its unsigned 32-bit value on line 2.",[["192 168 1 1","-1062731519\n3232235777"],["127 0 0 1","2130706433\n2130706433"],["255 255 255 255","-1\n4294967295"],["0 0 0 0","0\n0"],["10 0 0 255","167772415\n167772415"],["128 0 0 0","-2147483648\n2147483648"],["172 16 254 1","-1408172543\n2886794753"],["8 8 8 8","134744072\n134744072"],["1 2 3 4","16909060\n16909060"],["255 0 255 0","-16711936\n4278255360"],["127 255 255 255","2147483647\n2147483647"],["0 0 1 0","256\n256"]]],["Datatypes · Easy","Read a price as double p (two decimals) and tax percentage as int t (0 to 100). Compute total = p * (1 + t / 100.0) rounded to nearest cent (half-up) and print with %.2f. Beware of binary floating-point rounding drift.",[["19.99 10","21.99"],["100.00 18","118.00"],["0.01 50","0.02"],["12.35 10","13.59"],["9.99 5","10.49"],["0.00 20","0.00"],["250.50 8","270.54"],["49.95 15","57.44"],["1.05 10","1.16"],["999.99 100","1999.98"],["33.33 3","34.33"],["7.50 6","7.95"]]],["Math · Medium","LeetCode 1344: Read two ints hour (1 to 12) and minutes (0 to 59). Print the smaller angle (in degrees, <= 180) formed between the hour and minute hands formatted to 1 decimal place (%.1f).",[["12 30","165.0"],["3 30","75.0"],["3 15","7.5"],["12 0","0.0"],["6 0","180.0"],["9 0","90.0"],["1 57","76.5"],["11 59","5.5"],["4 40","100.0"],["8 20","130.0"],["5 12","84.0"],["7 42","21.0"]]],["Math · Medium","LeetCode 223: Read 8 ints ax1 ay1 ax2 ay2 bx1 by1 bx2 by2 representing two axis-aligned rectangles. Print the total area covered by the two rectangles (without double-counting overlap). Watch out for overflow.",[["-3 0 3 4 0 -1 9 2","45"],["-2 -2 2 2 -2 -2 2 2","16"],["0 0 2 2 3 3 5 5","8"],["-10000 0 10000 10000 -5000 -5000 5000 5000","250000000"],["0 0 0 0 0 0 1 1","1"],["-5 -5 5 5 -1 -1 1 1","100"],["0 0 10 10 10 0 20 10","200"],["-100000 -100000 100000 100000 -100000 -100000 100000 100000","40000000000"],["1 1 4 4 2 2 3 3","9"],["-2 -2 2 2 1 1 5 5","31"],["0 0 5 5 -5 -5 0 0","50"],["2 2 6 6 4 4 8 8","28"]]],["Strings · Easy","LeetCode 171: Read an uppercase Excel column title (e.g. A -> 1, Z -> 26, AA -> 27, FXSHRXW -> 2147483647). Print its corresponding column number.",[["A","1"],["AB","28"],["ZY","701"],["Z","26"],["AA","27"],["AZ","52"],["BA","53"],["AAA","703"],["FXSHRXW","2147483647"],["CFDGSXM","1000000001"],["ZZ","702"],["XFD","16384"]]],["Strings · Easy","LeetCode 168: Read a positive integer n (1 <= n <= 2147483647). Print its corresponding Excel column title (1 -> A, 27 -> AA, 28 -> AB, 701 -> ZY).",[["1","A"],["28","AB"],["701","ZY"],["26","Z"],["27","AA"],["52","AZ"],["53","BA"],["702","ZZ"],["703","AAA"],["2147483647","FXSHRXW"],["16384","XFD"],["1000","ALL"]]],["Strings · Easy","LeetCode 67: Read two binary strings a and b (lengths up to 100, no BigInteger). Print their sum as a binary string.",[["11 1","100"],["1010 1011","10101"],["0 0","0"],["1 0","1"],["1111 1","10000"],["1000000000000000000000000000000 1000000000000000000000000000000","10000000000000000000000000000000"],["101 10","111"],["11111111 11111111","111111110"],["100 11","111"],["1 1111111","10000000"],["101010 10101","111111"],["0 101","101"]]],["Strings · Medium","LeetCode 43: Read two non-negative integers num1 and num2 as strings (up to 50 digits each, no BigInteger). Print their exact product as a string.",[["2 3","6"],["123 456","56088"],["0 999999999999999999","0"],["999 999","998001"],["123456789 987654321","121932631112635269"],["100000000000000000000 100000000000000000000","10000000000000000000000000000000000000000"],["1 1","1"],["99999999999999999999 99999999999999999999","9999999999999999999800000000000000000001"],["0 0","0"],["1001 2002","2004002"],["42 0","0"],["7777777777 8888888888","69135802455308641976"]]],["Strings · Easy","LeetCode 13: Read a valid Roman numeral string (value 1 to 3999). Print its integer value.",[["III","3"],["LVIII","58"],["MCMXCIV","1994"],["IV","4"],["IX","9"],["XL","40"],["XC","90"],["CD","400"],["CM","900"],["MMMCMXCIX","3999"],["MMXXVI","2026"],["DCCCLXXXVIII","888"]]],["Strings · Medium","LeetCode 12: Read an integer n (1 <= n <= 3999). Print its Roman numeral representation.",[["3","III"],["58","LVIII"],["1994","MCMXCIV"],["4","IV"],["9","IX"],["40","XL"],["90","XC"],["400","CD"],["900","CM"],["3999","MMMCMXCIX"],["2026","MMXXVI"],["888","DCCCLXXXVIII"]]],["Strings · Medium","LeetCode 38: Read n (1 <= n <= 20). Print the n-th term of the Count-and-Say sequence (1 -> \"1\", 2 -> \"11\", 3 -> \"21\", 4 -> \"1211\", ...).",[["1","1"],["2","11"],["3","21"],["4","1211"],["5","111221"],["6","312211"],["7","13112221"],["8","1113213211"],["9","31131211131221"],["10","13211311123113112211"],["12","3113112221232112111312211312113211"],["15","311311222113111231131112132112311321322112111312211312111322212311322113212221"]]],["Strings · Medium","LeetCode 443 (String variant): Read a string s of lowercase letters. Compress consecutive repeating characters: keep single chars as-is, and append count if count > 1 (e.g. aabbccc -> a2b2c3, ab -> ab).",[["aabbccc","a2b2c3"],["a","a"],["abbbbbbbbbbbb","ab12"],["abc","abc"],["aaaa","a4"],["aaabbaa","a3b2a2"],["xyz","xyz"],["zzzzzzzzzz","z10"],["aab","a2b"],["abb","ab2"],["mississippi","mis2is2ip2i"],["wwwwaaadexxxxxx","w4a3dex6"]]],["Strings · Medium","LeetCode 8: Read a line s. Trim leading spaces, read optional + or -, then read digits until a non-digit. Clamp the integer to [Integer.MIN_VALUE, Integer.MAX_VALUE] (-2147483648 to 2147483647). Return 0 if no digits found.",[["42","42"],["   -42","-42"],["4193 with words","4193"],["words and 987","0"],["-91283472332","-2147483648"],["91283472332","2147483647"],["+1","1"],["+-12","0"],["00000-42a1234","0"],["   +0 123","0"],["-2147483648","-2147483648"],["2147483647","2147483647"]]],["Strings · Medium","LeetCode 539: Read int n (2 <= n <= 100), followed by n times in HH:MM 24-hour format. Print the minimum difference in minutes between any two time-points (circular across midnight).",[["2 23:59 00:00","1"],["3 00:00 23:59 00:00","0"],["3 01:01 02:01 03:00","59"],["2 00:00 12:00","720"],["4 05:31 22:08 00:35 14:12","147"],["2 12:30 12:30","0"],["3 00:01 23:58 12:00","3"],["4 06:00 12:00 18:00 23:59","359"],["2 01:00 23:00","120"],["3 10:15 10:20 10:18","2"],["2 00:00 00:01","1"],["5 02:00 04:30 09:45 15:10 21:55","150"]]],["Bitwise · Easy","LeetCode 136: Read odd int n, followed by n integers where every element appears twice except for one. Find and print that single element in O(1) extra space.",[["3 2 2 1","1"],["5 4 1 2 1 2","4"],["1 1","1"],["7 -1 5 -1 9 5 9 -99","-99"],["5 0 1 0 1 42","42"],["3 2147483647 -2147483648 2147483647","-2147483648"],["5 10 20 30 20 10","30"],["9 1 2 3 4 5 4 3 2 1","5"],["3 -5 -5 -10","-10"],["5 100 200 100 300 200","300"],["1 0","0"],["5 7 8 7 8 9","9"]]],["Bitwise · Medium","LeetCode 137: Read int n, followed by n ints where every element appears exactly three times except for one, which appears once. Find and print that single element in O(1) extra space.",[["4 2 2 3 2","3"],["7 0 1 0 1 0 1 99","99"],["1 42","42"],["7 -2 -2 1 -2 1 1 -5","-5"],["10 5 5 5 8 8 8 12 12 12 -100","-100"],["4 -2147483648 -2147483648 -2147483648 7","7"],["4 7 7 7 -2147483648","-2147483648"],["7 10 20 10 20 10 20 30","30"],["4 0 0 0 1","1"],["7 -1 -1 -1 -2 -2 -2 0","0"],["4 123 123 123 456","456"],["10 3 3 3 4 4 4 5 5 5 6","6"]]],["Bitwise · Medium","LeetCode 260: Read int n, followed by n ints where exactly two elements appear once and all other elements appear twice. Print the two single elements in ascending order separated by a space in O(1) extra space.",[["6 1 2 1 3 2 5","3 5"],["2 -1 0","-1 0"],["2 0 1","0 1"],["4 10 20 10 30","20 30"],["6 -5 -5 -10 7 7 2","-10 2"],["4 2147483647 -2147483648 5 5","-2147483648 2147483647"],["8 1 2 3 4 1 2 5 4","3 5"],["4 100 200 200 300","100 300"],["6 0 1 2 0 1 3","2 3"],["4 -99 -100 -99 50","-100 50"],["6 8 8 16 16 32 64","32 64"],["2 42 -42","-42 42"]]],["Bitwise · Easy","LeetCode 268: Read int n, followed by n distinct integers in the range [0, n]. Print the single missing number in O(n) time and O(1) space.",[["3 3 0 1","2"],["2 0 1","2"],["9 9 6 4 2 3 5 7 0 1","8"],["1 0","1"],["1 1","0"],["4 1 2 3 4","0"],["5 0 1 2 3 4","5"],["5 0 2 3 4 5","1"],["6 6 5 4 3 1 0","2"],["4 0 1 3 4","2"],["7 7 0 1 2 3 4 5","6"],["3 0 2 3","1"]]],["Bitwise · Easy","LeetCode 338: Read int n (0 <= n <= 100). For every i from 0 to n, print the number of 1-bits in binary representation of i, space-separated.",[["2","0 1 1"],["5","0 1 1 2 1 2"],["0","0"],["1","0 1"],["7","0 1 1 2 1 2 2 3"],["8","0 1 1 2 1 2 2 3 1"],["10","0 1 1 2 1 2 2 3 1 2 2"],["15","0 1 1 2 1 2 2 3 1 2 2 3 2 3 3 4"],["16","0 1 1 2 1 2 2 3 1 2 2 3 2 3 3 4 1"],["20","0 1 1 2 1 2 2 3 1 2 2 3 2 3 3 4 1 2 2 3 2"],["31","0 1 1 2 1 2 2 3 1 2 2 3 2 3 3 4 1 2 2 3 2 3 3 4 2 3 3 4 3 4 4 5"],["32","0 1 1 2 1 2 2 3 1 2 2 3 2 3 3 4 1 2 2 3 2 3 3 4 2 3 3 4 3 4 4 5 1"]]],["Bitwise · Easy","LeetCode 190: Read an int n (representing 32 unsigned bits). Reverse all 32 bits of n and print the resulting signed 32-bit int.",[["43261596","964176192"],["-3","-1073741825"],["0","0"],["1","-2147483648"],["-2147483648","1"],["-1","-1"],["2","1073741824"],["2147483647","-2"],["15","-268435456"],["255","-16777216"],["1024","2097152"],["-1073741825","-3"]]],["Bitwise · Medium","LeetCode 477: Read int n (1 <= n <= 1000) and n non-negative ints. Print the sum of Hamming distances (differing bit positions) across all pairs (i < j) in O(32 * n) time.",[["3 4 14 2","6"],["3 4 14 4","4"],["1 5","0"],["2 0 15","4"],["4 1 2 4 8","12"],["5 0 0 0 0 0","0"],["4 2147483647 0 2147483647 0","124"],["3 7 8 15","8"],["4 3 5 9 17","12"],["2 1023 1024","11"],["5 1 3 7 15 31","20"],["3 100 200 300","12"]]],["Bitwise · Medium","LeetCode 201: Read two ints left and right (0 <= left <= right <= 2147483647). Print the bitwise AND of all integers in [left, right] in O(1)/O(32) time.",[["5 7","4"],["0 0","0"],["1 2147483647","0"],["0 1","0"],["10 11","10"],["12 15","12"],["8 15","8"],["16 16","16"],["2147483646 2147483647","2147483646"],["100 105","96"],["1024 2047","1024"],["6 7","6"]]],["Bitwise · Easy","LeetCode 342: Read an int n. Without loops or recursion, print true if n is a power of 4 (4^k, k >= 0), otherwise false.",[["16","true"],["5","false"],["1","true"],["4","true"],["8","false"],["0","false"],["-16","false"],["-4","false"],["64","true"],["256","true"],["1024","true"],["1073741824","true"]]],["Bitwise · Easy","LeetCode 2220: Read two ints start and goal. Print the minimum number of bit flips needed to convert start to goal.",[["10 7","3"],["3 4","3"],["0 0","0"],["1 0","1"],["2147483647 0","31"],["-1 0","32"],["255 128","7"],["1024 1023","11"],["42 42","0"],["15 240","8"],["7 8","4"],["100 200","4"]]],["Bitwise · Medium","LeetCode 397: Read positive int n (1 <= n <= 2147483647). If n is even replace with n/2; if odd replace with n+1 or n-1. Print the minimum operations to reach 1 (watch out for Integer.MAX_VALUE overflow!).",[["8","3"],["7","4"],["4","2"],["1","0"],["3","2"],["15","5"],["65535","17"],["2147483647","32"],["100000000","31"],["27","7"],["1023","11"],["9","4"]]],["Bitwise · Medium","LeetCode 89: Read int n (1 <= n <= 8). Print the n-bit Gray code sequence of 2^n integers starting with 0, where adjacent numbers differ by exactly 1 bit (formula i ^ (i >> 1)).",[["1","0 1"],["2","0 1 3 2"],["3","0 1 3 2 6 7 5 4"],["4","0 1 3 2 6 7 5 4 12 13 15 14 10 11 9 8"],["5","0 1 3 2 6 7 5 4 12 13 15 14 10 11 9 8 24 25 27 26 30 31 29 28 20 21 23 22 18 19 17 16"],["6","0 1 3 2 6 7 5 4 12 13 15 14 10 11 9 8 24 25 27 26 30 31 29 28 20 21 23 22 18 19 17 16 48 49 51 50 54 55 53 52 60 61 63 62 58 59 57 56 40 41 43 42 46 47 45 44 36 37 39 38 34 35 33 32"],["7","0 1 3 2 6 7 5 4 12 13 15 14 10 11 9 8 24 25 27 26 30 31 29 28 20 21 23 22 18 19 17 16 48 49 51 50 54 55 53 52 60 61 63 62 58 59 57 56 40 41 43 42 46 47 45 44 36 37 39 38 34 35 33 32 96 97 99 98 102 103 101 100 108 109 111 110 106 107 105 104 120 121 123 122 126 127 125 124 116 117 119 118 114 115 113 112 80 81 83 82 86 87 85 84 92 93 95 94 90 91 89 88 72 73 75 74 78 79 77 76 68 69 71 70 66 67 65 64"],["8","0 1 3 2 6 7 5 4 12 13 15 14 10 11 9 8 24 25 27 26 30 31 29 28 20 21 23 22 18 19 17 16 48 49 51 50 54 55 53 52 60 61 63 62 58 59 57 56 40 41 43 42 46 47 45 44 36 37 39 38 34 35 33 32 96 97 99 98 102 103 101 100 108 109 111 110 106 107 105 104 120 121 123 122 126 127 125 124 116 117 119 118 114 115 113 112 80 81 83 82 86 87 85 84 92 93 95 94 90 91 89 88 72 73 75 74 78 79 77 76 68 69 71 70 66 67 65 64 192 193 195 194 198 199 197 196 204 205 207 206 202 203 201 200 216 217 219 218 222 223 221 220 212 213 215 214 210 211 209 208 240 241 243 242 246 247 245 244 252 253 255 254 250 251 249 248 232 233 235 234 238 239 237 236 228 229 231 230 226 227 225 224 160 161 163 162 166 167 165 164 172 173 175 174 170 171 169 168 184 185 187 186 190 191 189 188 180 181 183 182 178 179 177 176 144 145 147 146 150 151 149 148 156 157 159 158 154 155 153 152 136 137 139 138 142 143 141 140 132 133 135 134 130 131 129 128"]]],["Bitwise · Medium","LeetCode 1863: Read int n (1 <= n <= 20) and n ints. Print the sum of the XOR totals of all 2^n subsets (can be solved in O(n) via (bitwise OR of all elements) << (n - 1)!).",[["2 1 3","6"],["3 5 1 6","28"],["6 3 4 5 6 7 8","480"],["1 7","7"],["4 1 2 4 8","120"],["3 0 0 0","0"],["5 1 1 1 1 1","16"],["4 2 4 6 8","112"],["3 10 20 30","120"],["5 3 5 7 9 11","240"],["2 0 5","10"],["4 15 15 15 15","120"]]],["Bitwise · Medium","LeetCode 29: Read two ints dividend and divisor (divisor != 0). Compute quotient truncated toward zero WITHOUT using *, /, or %. If quotient overflows 32-bit int (-2147483648 / -1), print 2147483647.",[["10 3","3"],["7 -3","-2"],["-2147483648 -1","2147483647"],["-2147483648 1","-2147483648"],["-2147483648 2","-1073741824"],["2147483647 1","2147483647"],["2147483647 -1","-2147483647"],["0 5","0"],["-15 3","-5"],["-15 -3","5"],["1 1","1"],["1000000 3","333333"]]],["Bitwise · Medium","LeetCode 371: Read two ints a and b. Print a + b WITHOUT using the + or - operators (use bitwise ^ for sum without carry, and (a & b) << 1 for carry).",[["1 2","3"],["2 3","5"],["-1 1","0"],["-5 -7","-12"],["0 0","0"],["100 -30","70"],["-100 30","-70"],["2147483647 -1","2147483646"],["-2147483648 1","-2147483647"],["12345 67890","80235"],["-999 999","0"],["42 0","42"]]],["Math · Easy","LeetCode 202: Read positive int n. Repeatedly replace n by the sum of squares of its digits. Print Happy if it reaches 1, or Unhappy if it loops endlessly (use cycle detection).",[["19","Happy"],["2","Unhappy"],["1","Happy"],["7","Happy"],["4","Unhappy"],["10","Happy"],["13","Happy"],["23","Happy"],["28","Happy"],["100","Happy"],["116","Unhappy"],["2147483647","Unhappy"]]],["Math · Easy","LeetCode 263: Read int n. Print true if n is an ugly number (positive integer whose only prime factors are 2, 3, and 5; 1 counts as ugly), otherwise false.",[["6","true"],["1","true"],["14","false"],["8","true"],["0","false"],["-6","false"],["30","true"],["25","true"],["21","false"],["1000","true"],["2147483647","false"],["150","true"]]],["Math · DP · Medium","LeetCode 264: Read int n (1 <= n <= 1500). Print the n-th ugly number (positive integer whose prime factors only include 2, 3, 5).",[["10","12"],["1","1"],["11","15"],["15","24"],["50","243"],["100","1536"],["250","38880"],["500","937500"],["1000","51200000"],["1352","402653184"],["1500","859963392"],["7","8"]]],["Math · Brainteaser · Medium","LeetCode 319: There are n bulbs initially off. Round i (1..n) toggles every i-th bulb. Read n (0 <= n <= 10^9) and print how many bulbs remain ON after n rounds in O(1) time.",[["3","1"],["0","0"],["1","1"],["4","2"],["8","2"],["9","3"],["15","3"],["16","4"],["99","9"],["100","10"],["99999999","9999"],["1000000000","31622"]]],["Math · Brainteaser · Easy","LeetCode 292: Read int n (stones in heap). You and a friend take turns removing 1, 2, or 3 stones; you go first. Whoever removes the last stone wins. Print true if you can force a win, otherwise false.",[["4","false"],["1","true"],["2","true"],["3","true"],["5","true"],["8","false"],["12","false"],["13","true"],["100","false"],["101","true"],["2147483647","true"],["2147483644","false"]]],["Math · Simulation · Medium","LeetCode 1823: Read n (1 <= n <= 500) friends in a circle (1..n) and k (1 <= k <= 500). Starting from 1, count k friends clockwise and eliminate the k-th; repeat until 1 remains. Print the winner.",[["5 2","3"],["6 5","1"],["1 1","1"],["10 3","4"],["41 2","19"],["7 1","7"],["100 7","50"],["500 500","69"],["8 4","6"],["15 6","7"],["20 1","20"],["2 99","2"]]],["Math · Medium","LeetCode 365: Read three ints x, y, target (capacities of two jugs and target liters). Print true if you can measure exact target liters using the two jugs (fill, empty, pour), otherwise false.",[["3 5 4","true"],["2 6 5","false"],["1 2 3","true"],["0 0 0","true"],["0 0 1","false"],["4 6 8","true"],["13 11 1","true"],["100 200 150","false"],["104579 104593 12444","true"],["6 9 1","false"],["10 15 25","true"],["7 0 7","true"]]],["Math · Sieve · Medium","LeetCode 204: Read int n (0 <= n <= 100000). Print the number of prime numbers strictly LESS than n using Sieve of Eratosthenes.",[["10","4"],["0","0"],["1","0"],["2","0"],["3","1"],["20","8"],["100","25"],["1000","168"],["10000","1229"],["50000","5133"],["99991","9591"],["100000","9592"]]],["Math · Medium","LeetCode 50: Read double x and int n (-2147483648 <= n <= 2147483647). Compute x^n using binary exponentiation (no Math.pow) and print with %.4f.",[["2.0 10","1024.0000"],["2.1 3","9.2610"],["2.0 -2","0.2500"],["1.0 2147483647","1.0000"],["1.0 -2147483648","1.0000"],["-1.0 -2147483648","1.0000"],["-2.0 3","-8.0000"],["0.5 4","0.0625"],["2.0 0","1.0000"],["0.0 5","0.0000"],["-1.0 2147483647","-1.0000"],["1.0001 1000","1.1052"]]],["Math · Binary Search · Easy","LeetCode 69: Read non-negative long x (0 <= x <= 10^18). Print floor(sqrt(x)) computed via binary search WITHOUT using Math.sqrt.",[["4","2"],["8","2"],["0","0"],["1","1"],["2","1"],["2147395599","46339"],["2147483647","46340"],["999999999999999999","999999999"],["1000000000000000000","1000000000"],["99","9"],["100","10"],["26","5"]]],["Math · Binary Search · Easy","LeetCode 367: Read positive int num (1 <= num <= 2147483647). Print true if num is a perfect square, otherwise false, WITHOUT using Math.sqrt.",[["16","true"],["14","false"],["1","true"],["2147395600","true"],["2147483647","false"],["808201","true"],["9","true"],["10","false"],["25","true"],["1000000","true"],["999999","false"],["2","false"]]],["Math · Binary Search · Easy","LeetCode 441: You have n coins (1 <= n <= 2147483647) to build a staircase where the k-th row has k coins. Print the total number of FULL rows you can build.",[["5","2"],["8","3"],["1","1"],["3","2"],["6","3"],["10","4"],["1804289383","60070"],["2147483647","65535"],["2","1"],["14","4"],["15","5"],["1000000","1413"]]],["Math · Easy","LeetCode 2582: n people (2 <= n <= 1000) stand in a line 1..n. Each second, a pillow is passed to the next person, reversing direction at ends 1 and n. Read n and time t, and print who holds the pillow after t seconds in O(1).",[["4 5","2"],["3 2","3"],["2 100","1"],["5 0","1"],["5 4","5"],["5 8","1"],["5 7","2"],["10 17","2"],["1000 1000000","999"],["4 3","4"],["4 6","1"],["6 9","2"]]],["Math · Greedy · Medium","LeetCode 991: Read startValue and target (1 <= startValue, target <= 10^9). On a broken calculator you can only double the value or subtract 1. Print minimum operations to display target.",[["2 3","2"],["5 8","2"],["3 10","3"],["1024 1","1023"],["1 1000000000","39"],["7 7","0"],["4 15","3"],["10 19","2"],["6 100","10"],["100 50","50"],["1 1","0"],["8 30","3"]]],["Math · Medium","LeetCode 829: Read positive int n (1 <= n <= 10^9). Print how many ways n can be written as the sum of one or more consecutive positive integers (hint: n = k*x + k*(k-1)/2).",[["5","2"],["9","3"],["15","4"],["1","1"],["2","1"],["3","2"],["4","1"],["10","2"],["100","3"],["1000000","7"],["999999999","20"],["536870912","1"]]],["Arrays · Two Pointers · Medium","LeetCode 167: Read int n, then n sorted integers in non-decreasing order, then int target. Find two elements (1-indexed i < j) that add up to target and print \"i j\" (guaranteed unique solution).",[["4 2 7 11 15 9","1 2"],["3 2 3 4 6","1 3"],["2 -1 0 -1","1 2"],["5 -10 -3 0 4 9 1","2 4"],["4 1 2 3 4 7","3 4"],["6 -5 -2 0 1 3 8 6","2 6"],["2 0 0 0","1 2"],["5 1 3 5 7 9 16","4 5"],["4 -100 -50 50 100 0","1 4"],["3 5 25 75 100","2 3"],["4 1 1 2 3 2","1 2"],["5 2 4 6 8 10 14","2 5"]]],["Arrays · Kadane · Medium","LeetCode 53: Read int n (1 <= n <= 1000) and n ints. Find and print the maximum sum of any contiguous non-empty subarray (handle all-negative arrays!).",[["9 -2 1 -3 4 -1 2 1 -5 4","6"],["1 1","1"],["5 5 4 -1 7 8","23"],["4 -5 -2 -9 -1","-1"],["1 -42","-42"],["6 -1 2 3 -10 4 5","9"],["3 0 0 0","0"],["5 -2 -1 -3 -4 -1","-1"],["7 10 -20 5 6 -1 8 -3","18"],["4 100 -1 -1 100","198"],["5 1 2 3 4 5","15"],["6 -3 4 -1 2 -6 5","5"]]],["Arrays · Greedy · Easy","LeetCode 121: Read int n and n daily stock prices. Print the maximum profit achievable from a single buy followed by a later sell (0 if no profit possible).",[["6 7 1 5 3 6 4","5"],["5 7 6 4 3 1","0"],["1 5","0"],["2 1 2","1"],["2 2 1","0"],["5 3 3 3 3 3","0"],["6 2 4 1 7 5 9","8"],["4 10 1 10 1","9"],["5 1 2 3 4 5","4"],["6 8 6 4 9 2 10","8"],["3 0 0 5","5"],["4 5 2 8 1","6"]]],["Arrays · Greedy · Medium","LeetCode 122: Read int n and n daily stock prices. You may complete as many buy/sell transactions as you like (holding at most 1 share at a time). Print maximum total profit.",[["6 7 1 5 3 6 4","7"],["5 1 2 3 4 5","4"],["5 7 6 4 3 1","0"],["1 10","0"],["2 1 10","9"],["6 2 1 4 2 5 9","10"],["4 5 5 5 5","0"],["5 1 5 2 8 3","10"],["6 3 2 6 5 0 3","7"],["4 10 20 5 15","20"],["3 1 0 1","1"],["5 4 2 7 1 9","13"]]],["Arrays · Two Pointers · Easy","LeetCode 283: Read int n and n integers. Move all 0s to the end while maintaining the relative order of non-zero elements. Print the resulting array space-separated.",[["5 0 1 0 3 12","1 3 12 0 0"],["1 0","0"],["1 5","5"],["4 0 0 0 1","1 0 0 0"],["5 1 2 3 4 5","1 2 3 4 5"],["4 0 0 0 0","0 0 0 0"],["6 4 0 5 0 0 6","4 5 6 0 0 0"],["3 0 -1 0","-1 0 0"],["5 1 0 2 0 3","1 2 3 0 0"],["2 0 1","1 0"],["4 -5 0 -2 0","-5 -2 0 0"],["6 0 1 0 2 0 3","1 2 3 0 0 0"]]],["Arrays · Two Pointers · Medium","LeetCode 189: Read int n, then n ints, then non-negative int k. Rotate the array to the right by k steps (k may exceed n) and print space-separated.",[["7 1 2 3 4 5 6 7 3","5 6 7 1 2 3 4"],["4 -1 -100 3 99 2","3 99 -1 -100"],["5 1 2 3 4 5 0","1 2 3 4 5"],["5 1 2 3 4 5 5","1 2 3 4 5"],["5 1 2 3 4 5 12","4 5 1 2 3"],["1 42 100","42"],["2 10 20 1","20 10"],["2 10 20 2","10 20"],["6 1 2 3 4 5 6 4","3 4 5 6 1 2"],["3 7 8 9 100","9 7 8"],["4 1 2 3 4 3","2 3 4 1"],["5 9 8 7 6 5 1","5 9 8 7 6"]]],["Arrays · Prefix · Medium","LeetCode 238: Read int n (2 <= n <= 50) and n ints. Print n space-separated ints where output[i] equals the product of all elements except nums[i], WITHOUT using division (use long to avoid overflow).",[["4 1 2 3 4","24 12 8 6"],["5 -1 1 0 -3 3","0 0 9 0 0"],["3 0 0 5","0 0 0"],["2 5 10","10 5"],["4 2 3 4 5","60 40 30 24"],["4 -1 -2 -3 -4","-24 -12 -8 -6"],["3 1 0 1","0 1 0"],["5 1 1 1 1 1","1 1 1 1 1"],["3 1000 1000 1000","1000000 1000000 1000000"],["4 0 2 3 4","24 0 0 0"],["2 0 0","0 0"],["5 2 -2 2 -2 2","16 -16 16 -16 16"]]],["Arrays · Two Pointers · Medium","LeetCode 11: Read int n (2 <= n <= 1000) and n non-negative line heights. Find two lines that together with the x-axis form a container holding the most water. Print the maximum area.",[["9 1 8 6 2 5 4 8 3 7","49"],["2 1 1","1"],["5 4 3 2 1 4","16"],["3 1 2 1","2"],["6 10 9 8 7 6 5","25"],["4 0 5 0 5","10"],["5 1 100 100 1 1","100"],["6 5 2 12 1 5 3","20"],["2 0 10","0"],["4 3 9 3 4","9"],["5 2 3 4 5 18","9"],["3 10 1 10","20"]]],["Arrays · Two Pointers · Medium","LeetCode 42: Read int n and n non-negative elevation bar heights (width 1). Print how many units of rainwater can be trapped after raining.",[["12 0 1 0 2 1 0 1 3 2 1 2 1","6"],["6 4 2 0 3 2 5","9"],["1 5","0"],["3 1 2 3","0"],["3 3 2 1","0"],["3 3 0 3","3"],["5 5 1 5 1 5","8"],["4 0 0 0 0","0"],["5 2 0 2 0 2","4"],["7 3 0 0 2 0 4 1","10"],["4 4 2 3 4","3"],["6 1 0 2 0 3 0","3"]]],["Arrays · Boyer-Moore · Easy","LeetCode 169: Read int n and n integers where a majority element appears strictly more than n/2 times. Print the majority element in O(n) time and O(1) space.",[["3 3 2 3","3"],["7 2 2 1 1 1 2 2","2"],["1 42","42"],["5 -1 -1 2 -1 3","-1"],["5 6 5 5 6 5","5"],["4 1 1 1 2","1"],["9 9 1 9 2 9 3 9 4 9","9"],["3 0 0 1","0"],["5 100 200 100 100 300","100"],["7 4 4 4 4 1 2 3","4"],["3 -5 -5 -5","-5"],["5 7 8 7 8 7","7"]]],["Arrays · Two Pointers · Medium","LeetCode 75: Read int n and n integers each in {0, 1, 2}. Sort them in-place in a single pass (Dutch National Flag algorithm) and print space-separated.",[["6 2 0 2 1 1 0","0 0 1 1 2 2"],["3 2 0 1","0 1 2"],["1 0","0"],["5 2 2 1 0 0","0 0 1 2 2"],["4 1 1 1 1","1 1 1 1"],["6 0 1 2 0 1 2","0 0 1 1 2 2"],["5 2 1 0 2 1","0 1 1 2 2"],["3 0 0 0","0 0 0"],["4 2 1 2 0","0 1 2 2"],["7 1 2 0 1 2 0 1","0 0 1 1 1 2 2"],["2 1 0","0 1"],["5 0 2 0 2 1","0 0 1 2 2"]]],["Arrays · Prefix Sum · Easy","LeetCode 724: Read int n and n ints. Print the leftmost 0-based pivot index where the sum of elements strictly to its left equals the sum strictly to its right, or -1 if none exists.",[["6 1 7 3 6 5 6","3"],["3 1 2 3","-1"],["3 2 1 -1","0"],["1 42","0"],["4 -1 -1 -1 -1","-1"],["5 0 0 0 0 0","0"],["4 1 -1 0 5","3"],["5 -1 -1 0 1 1","-1"],["3 1 0 1","1"],["4 10 -10 10 5","-1"],["5 1 2 3 3 3","-1"],["4 0 1 -1 0","0"]]],["Arrays · Prefix Sum · Medium","LeetCode 560: Read int n (1 <= n <= 500), n ints (can be negative or zero), and int k. Print the total number of contiguous subarrays whose sum equals k.",[["3 1 1 1 2","2"],["3 1 2 3 3","2"],["5 1 -1 0 1 -1 0","7"],["4 0 0 0 0 0","10"],["5 3 4 7 2 -3 7","2"],["3 -1 -1 1 0","1"],["1 5 5","1"],["1 5 0","0"],["6 1 2 1 2 1 2 3","5"],["4 10 2 -2 -20 10","2"],["5 2 2 2 2 2 4","4"],["4 -2 1 -3 4 -2","2"]]],["Arrays · Sliding Window · Easy","LeetCode 643 (Integer variant): Read int n, n ints, and int k (1 <= k <= n). Print the maximum sum of any contiguous subarray of length k using sliding window.",[["6 1 12 -5 -6 50 3 4","51"],["1 5 1","5"],["5 -1 -2 -3 -4 -5 2","-3"],["5 2 1 5 1 3 3","9"],["4 10 20 30 40 4","100"],["6 4 -1 2 1 -5 4 3","5"],["5 0 0 0 0 0 2","0"],["7 1 9 -1 -2 7 3 -1 4","13"],["3 -10 -20 -5 1","-5"],["4 5 5 5 5 2","10"],["6 100 -50 100 -50 100 -50 3","150"],["5 1 2 3 4 5 3","12"]]],["Arrays · Sliding Window · Medium","LeetCode 209: Read int n, n positive ints, and int target. Print the minimal length of a contiguous subarray whose sum >= target, or 0 if no such subarray exists.",[["6 2 3 1 2 4 3 7","2"],["3 1 4 4 4","1"],["8 1 1 1 1 1 1 1 1 11","0"],["5 1 2 3 4 5 15","5"],["5 1 2 3 4 5 16","0"],["1 10 10","1"],["1 5 10","0"],["6 5 1 3 5 10 7 15","2"],["4 10 20 30 40 35","1"],["5 2 2 2 2 2 5","3"],["4 1 1 1 10 10","1"],["6 3 4 1 1 6 2 8","2"]]],["Arrays · Sliding Window · Medium","LeetCode 1004: Read int n, n binary ints (0 or 1), and int k. Print the maximum number of consecutive 1s you can get by flipping at most k 0s to 1s.",[["11 1 1 1 0 0 0 1 1 1 1 0 2","6"],["19 0 0 1 1 0 0 1 1 1 0 1 1 0 0 0 1 1 1 1 3","10"],["5 0 0 0 0 0 0","0"],["5 0 0 0 0 0 3","3"],["5 1 1 1 1 1 0","5"],["1 0 1","1"],["1 0 0","0"],["6 1 0 1 0 1 0 1","3"],["7 0 1 0 1 0 1 0 2","5"],["4 1 0 0 1 2","4"],["6 0 0 1 1 0 0 2","4"],["5 1 1 0 1 1 1","5"]]],["Arrays · Binary Search · Medium","LeetCode 162: Read int n (1 <= n <= 1000) and n ints where adjacent elements are distinct (imagine nums[-1] = nums[n] = -infinity). Find a peak element strictly greater than its neighbors using O(log n) binary search and print its VALUE (if multiple peaks exist, print the one found by standard mid < mid+1 binary search, or test cases with unique peaks).",[["4 1 2 3 1","3"],["1 42","42"],["2 1 5","5"],["2 5 1","5"],["5 1 3 5 4 2","5"],["4 10 20 30 40","40"],["4 40 30 20 10","40"],["5 -5 -2 0 -1 -3","0"],["3 1 10 2","10"],["6 2 4 6 8 5 1","8"],["5 100 50 40 30 20","100"],["3 -10 -5 -20","-5"]]],["Arrays · Binary Search · Medium","LeetCode 33: Read int n, then n distinct ints (a sorted array rotated at some pivot), then int target. Print the 0-based index of target in O(log n) time, or -1 if not found.",[["7 4 5 6 7 0 1 2 0","4"],["7 4 5 6 7 0 1 2 3","-1"],["1 1 0","-1"],["1 1 1","0"],["2 3 1 1","1"],["2 3 1 3","0"],["5 5 1 2 3 4 2","2"],["5 2 3 4 5 1 1","4"],["6 10 20 30 1 5 8 20","1"],["6 10 20 30 1 5 8 15","-1"],["4 3 4 1 2 4","1"],["3 5 6 1 5","0"]]],["Arrays · Binary Search · Medium","LeetCode 153: Read int n (1 <= n <= 1000) and n distinct ints representing an ascending array rotated 1..n times. Print the minimum element in O(log n) time.",[["5 3 4 5 1 2","1"],["7 4 5 6 7 0 1 2","0"],["4 11 13 15 17","11"],["1 5","5"],["2 2 1","1"],["2 1 2","1"],["6 10 20 30 1 2 3","1"],["5 -1 0 1 -5 -3","-5"],["4 4 1 2 3","1"],["5 2 3 4 5 1","1"],["3 3 1 2","1"],["6 50 60 70 80 10 20","10"]]],["Arrays · Greedy · Medium","LeetCode 55: Read int n and n non-negative ints where nums[i] is your max jump length from index i. Starting at index 0, print true if you can reach the last index (n - 1), otherwise false.",[["5 2 3 1 1 4","true"],["5 3 2 1 0 4","false"],["1 0","true"],["2 0 1","false"],["2 1 0","true"],["4 2 0 0 0","false"],["5 2 5 0 0 0","true"],["4 1 1 1 0","true"],["6 1 2 0 1 0 1","false"],["3 2 0 1","true"],["4 0 2 3 4","false"],["5 4 0 0 0 0","true"]]],["Strings · Stack · Easy","LeetCode 20: Read a string s containing only ()[]{}. Print true if brackets are validly closed in the correct order, otherwise false.",[["()","true"],["()[]{}","true"],["(]","false"],["([)]","false"],["{[]}","true"],["(","false"],["]","false"],["((()))","true"],["{[()()]}","true"],["(([]){})","true"],["[([]])","false"],["{{{}}}[]()","true"]]],["Strings · Stack · Medium","LeetCode 921: Read a string s of ( and ) characters. Print the minimum number of parentheses you must add anywhere to make s valid.",[["())","1"],["(((","3"],["()","0"],["()))((","4"],[")(","2"],["((()))","0"],["))))))","6"],["((((((","6"],["(()())","0"],[")()(","2"],["(()","1"],["())(()","2"]]],["Strings · Hashing · Easy","LeetCode 242: Read two lowercase strings s and t. Print true if t is an anagram of s, otherwise false.",[["anagram nagaram","true"],["rat car","false"],["a a","true"],["ab ba","true"],["abc abcd","false"],["listen silent","true"],["aabbcc abcabc","true"],["aaab aabb","false"],["triangle integral","true"],["hello world","false"],["zz zz","true"],["x y","false"]]],["Strings · Two Pointers · Easy","LeetCode 125: Read a full line s. Considering only alphanumeric characters and ignoring case, print true if it reads the same forward and backward, otherwise false.",[["A man, a plan, a canal: Panama","true"],["race a car","false"],["   ","true"],["0P","false"],["Madam, in Eden, I'm Adam","true"],["No lemon, no melon","true"],["ab_a","true"],["12321","true"],["123421","false"],["Was it a car or a cat I saw?","true"],["hello!","false"],["a","true"]]],["Strings · Two Pointers · Easy","LeetCode 680: Read a lowercase string s. Print true if s can become a palindrome after deleting AT MOST ONE character, otherwise false.",[["aba","true"],["abca","true"],["abc","false"],["deeee","true"],["eceec","true"],["raceacar","true"],["a","true"],["ab","true"],["abcdef","false"],["aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga","true"],["cbbcc","true"],["atbbga","false"]]],["Strings · Sliding Window · Medium","LeetCode 3: Read a single token string s (printable ASCII). Print the length of the longest substring without repeating characters.",[["abcabcbb","3"],["bbbbb","1"],["pwwkew","3"],["a","1"],["au","2"],["dvdf","3"],["abba","2"],["tmmzuxt","5"],["abcdefg","7"],["anviaj","5"],["ckilbkd","5"],["abcdeafbdgcbb","7"]]],["Strings · Two Pointers · Medium","LeetCode 5 (Length): Read a string s (1 <= length <= 1000). Print the length of the longest palindromic substring inside s.",[["babad","3"],["cbbd","2"],["a","1"],["ac","1"],["racecar","7"],["abacdfgdcaba","3"],["aaaaa","5"],["abcde","1"],["bananas","5"],["forgeeksskeegfor","10"],["abba","4"],["xyzzyx123","6"]]],["Strings · Easy","LeetCode 14: Read int n (1 <= n <= 50), followed by n words. Print their longest common prefix, or NONE if there is no common prefix.",[["3 flower flow flight","fl"],["3 dog racecar car","NONE"],["1 alone","alone"],["4 interspace interstellar interstate internet","inter"],["2 a ab","a"],["3 abc abc abc","abc"],["2 abcd efgh","NONE"],["3 prefix pre present","pre"],["2 java javascript","java"],["4 test testing tested tester","test"],["2 hello hell","hell"],["3 x xy xyz","x"]]],["Strings · Hashing · Easy","LeetCode 205: Read two strings s and t of equal length. Print true if s and t are isomorphic (a 1-to-1 character mapping exists preserving order, no two chars map to the same char), otherwise false.",[["egg add","true"],["foo bar","false"],["paper title","true"],["badc baba","false"],["ab aa","false"],["a b","true"],["abab cdcd","true"],["abca zbxz","true"],["123 456","true"],["112 344","false"],["abc def","true"],["xyy xzz","true"]]],["Strings · Stack · Easy","LeetCode 844: Read two strings s and t where # represents a backspace character. Print true if both produce the same final string, otherwise false.",[["ab#c ad#c","true"],["ab## c#d#","true"],["a#c b","false"],["a##c #a#c","true"],["### ##","true"],["bxj##tw bxo#j##tw","true"],["y#fo##f y#f#o##f","true"],["abc def","false"],["a#b#c# #","true"],["xywrrmp xywrrmu#p","true"],["aaa###a a","true"],["ab#d ac#d","true"]]],["Strings · Stack · Medium","LeetCode 394: Read an encoded string s where k[encoded_string] repeats encoded_string exactly k times (may be nested, e.g. 3[a2[c]] -> accaccacc). Print the decoded string.",[["3[a]2[bc]","aaabcbc"],["3[a2[c]]","accaccacc"],["2[abc]3[cd]ef","abcabccdcdcdef"],["abc3[cd]xyz","abccdcdcdxyz"],["10[a]","aaaaaaaaaa"],["2[2[y]pq4[2[jk]e1[f]]]ef","yypqjkjkefjkjkefjkjkefjkjkefyypqjkjkefjkjkefjkjkefjkjkefef"],["1[z]","z"],["3[ab2[x]]","abxxabxxabxx"],["4[a]b2[c]","aaaabcc"],["2[a3[b]c]","abbbcabbbc"],["5[x]","xxxxx"],["2[3[a]]","aaaaaa"]]],["Strings · Stack · Easy","LeetCode 1047: Read a lowercase string s. Repeatedly remove adjacent identical character pairs until no adjacent duplicates remain (e.g. abbaca -> ca). Print the final string (or EMPTY if nothing remains).",[["abbaca","ca"],["azxxzy","ay"],["aabbcc","EMPTY"],["abcd","abcd"],["aaaa","EMPTY"],["aaaaa","a"],["mississippi","m"],["abccba","EMPTY"],["aaaaaaaa","EMPTY"],["xyyx","EMPTY"],["a","a"],["abbaa","a"]]],["Strings · Two Pointers · Medium","LeetCode 151: Read a full line s containing words separated by one or more spaces (possibly leading/trailing spaces). Reverse the order of words separated by a single space.",[["the sky is blue","blue is sky the"],["  hello world  ","world hello"],["a good   example","example good a"],["single","single"],["  Bob    Loves  Alice   ","Alice Loves Bob"],["java   is   fun","fun is java"],["one two three four","four three two one"],["  a  b  c  ","c b a"],["hello","hello"],["keep calm and code java","java code and calm keep"],["1 2 3 4 5","5 4 3 2 1"],["  trim   me  ","me trim"]]],["Strings · Hashing · Easy","LeetCode 387: Read a lowercase string s. Print the 0-based index of the first non-repeating character, or -1 if every character repeats.",[["leetcode","0"],["loveleetcode","2"],["aabb","-1"],["z","0"],["aadadaad","-1"],["abcabc","-1"],["abcabcd","6"],["swiss","1"],["programming","0"],["aabbccd","6"],["xxyyzz","-1"],["abba","-1"]]],["Strings · Two Pointers · Easy","LeetCode 392: Read two lowercase strings s and t. Print true if s is a subsequence of t (characters appear in order, not necessarily contiguous), otherwise false.",[["abc ahbgdc","true"],["axc ahbgdc","false"],["ace abcde","true"],["aec abcde","false"],["a a","true"],["a b","false"],["aaa aa","false"],["aaa aaaa","true"],["java jxaxvxax","true"],["code cdooe","false"],["b abc","true"],["xyz xxyyzz","true"]]],["Stack · Medium","LeetCode 150: Read int n, followed by n Reverse Polish Notation tokens (+, -, *, /, or integers; integer division truncates toward zero). Print the evaluated integer result.",[["5 2 1 + 3 *","9"],["5 4 13 5 / +","6"],["13 10 6 9 3 + -11 * / * 17 + 5 +","22"],["1 42","42"],["3 5 2 -","3"],["3 2 5 -","-3"],["5 7 -3 / 2 *","-4"],["5 3 4 + 2 * 7 /","2"],["7 1 2 + 3 4 + *","21"],["3 100 0 +","100"],["5 9 3 / 2 *","6"],["3 -10 3 /","-3"]]],["Stack · Parsing · Medium","LeetCode 227: Read a full-line arithmetic expression containing non-negative integers, +, -, *, /, and optional spaces (no parentheses). Evaluate respecting * and / precedence (division truncates toward zero) and print the result.",[["3+2*2","7"],[" 3/2 ","1"],[" 3+5 / 2 ","5"],["14-3/2","13"],["100+200*3-50/5","690"],["0-2147483647","-2147483647"],["1*2-3/4+5*6-7*8+9/10","-24"],["42","42"],["10/3*3","9"],["2*3*4","24"],["100-50-25","25"],["8+4/2*3-1","13"]]],["Strings · Stack · Medium","LeetCode 71: Read a Unix-style absolute path string (starts with /). Simplify it by resolving \".\", \"..\", and multiple slashes \"//\" into a canonical path.",[["/home/","/home"],["/../","/"],["/home//foo/","/home/foo"],["/a/./b/../../c/","/c"],["/a/../../b/../c//.//","/c"],["/a//b////c/d//././/..","/a/b/c"],["/","/"],["/.../","/..."],["/home/user/Documents/../Pictures","/home/user/Pictures"],["/foo/bar/..","/foo"],["/./././.","/"],["/a/b/c/../../../","/"]]],["Stack · Simulation · Easy","LeetCode 682: Read int n and n operations: integer x (record score), \"+\" (sum of last 2 scores), \"D\" (double last score), \"C\" (invalidate last score). Print the total sum of remaining scores.",[["7 5 2 C D +","30"],["8 5 -2 4 C D 9 + +","27"],["2 1 C","0"],["5 10 20 + D C","60"],["4 -5 D + C","-15"],["3 1 2 3","6"],["6 5 D D D C +","65"],["1 100","100"],["4 0 0 + D","0"],["6 -10 20 + D C +","50"],["5 3 4 + C D","15"],["4 7 C 8 D","24"]]],["Strings · Greedy · Medium","LeetCode 1647: Read a lowercase string s. Print the minimum number of character deletions needed so that no two different characters in s have the same frequency.",[["aab","0"],["aaabbbcc","2"],["ceabaacb","2"],["abcabc","3"],["a","0"],["aaaa","0"],["ab","1"],["bbcebab","2"],["accdcdadddbaadbc","1"],["zzzyyyxxx","3"],["aabbccdd","5"],["xyzz","1"]]],["DP · Easy","LeetCode 70: Read int n (1 <= n <= 90). You climb a staircase of n steps, taking 1 or 2 steps at a time. Print how many distinct ways you can climb to the top (use long).",[["2","2"],["3","3"],["1","1"],["5","8"],["10","89"],["20","10946"],["45","1836311903"],["50","20365011074"],["70","308061521170129"],["90","4660046610375530309"],["4","5"],["30","1346269"]]],["DP · Medium","LeetCode 198: Read int n and n non-negative house values. You cannot rob two adjacent houses. Print the maximum total money you can rob.",[["4 1 2 3 1","4"],["5 2 7 9 3 1","12"],["1 10","10"],["2 5 10","10"],["4 2 1 1 2","4"],["6 6 7 1 3 8 2","15"],["5 0 0 0 0 0","0"],["5 10 1 1 10 1","20"],["6 5 5 10 100 10 5","110"],["3 4 10 4","10"],["4 100 1 1 100","200"],["7 1 2 3 4 5 6 7","16"]]],["DP · Medium","LeetCode 213: Read int n and n non-negative house values arranged in a CIRCLE (house 0 is adjacent to house n-1). Print the maximum money you can rob without alerting police.",[["3 2 3 2","3"],["4 1 2 3 1","4"],["3 1 2 3","3"],["1 5","5"],["2 10 20","20"],["5 2 7 9 3 1","11"],["4 200 3 140 20","340"],["6 1 3 1 3 100 2","103"],["4 10 10 10 10","20"],["5 5 1 2 10 6","15"],["4 1 1 1 1","2"],["6 6 7 1 3 8 2","15"]]],["DP · Medium","LeetCode 322: Read int n (number of coin denominations), n coin values, and int amount. Print the fewest coins needed to make up amount, or -1 if impossible.",[["3 1 2 5 11","3"],["1 2 3","-1"],["1 1 0","0"],["4 1 3 4 5 7","2"],["3 2 5 10 1","-1"],["2 3 7 12","4"],["3 186 419 83 6249","38"],["2 5 10 3","-1"],["3 1 5 10 27","5"],["2 4 6 15","-1"],["3 2 3 7 14","2"],["2 3 5 8","2"]]],["DP · Medium","LeetCode 518: Read int n, n distinct coin denominations, and int amount (0 <= amount <= 500). Print the number of combinations (order does not matter) that sum to amount (use long).",[["3 1 2 5 5","4"],["1 2 3","0"],["1 10 10","1"],["3 1 2 5 0","1"],["4 1 2 5 10 20","40"],["2 2 5 10","2"],["3 2 3 5 9","3"],["3 1 2 3 10","14"],["4 1 5 10 25 50","49"],["2 3 7 14","1"],["3 1 5 10 100","121"],["2 4 6 7","0"]]],["DP · Math · Medium","LeetCode 62: Read two ints m and n (1 <= m, n <= 20). A robot starts at top-left (0,0) of an m x n grid and can only move right or down. Print total unique paths to bottom-right (use long).",[["3 7","28"],["3 2","3"],["1 1","1"],["1 10","1"],["10 1","1"],["3 3","6"],["5 5","70"],["10 10","48620"],["15 15","40116600"],["20 10","6906900"],["18 18","2333606220"],["2 100","100"]]],["DP · Matrix · Medium","LeetCode 64: Read ints r and c, followed by r * c non-negative grid values. Moving only right or down from top-left to bottom-right, print the minimum sum along a path.",[["3 3 1 3 1 1 5 1 4 2 1","7"],["2 3 1 2 3 4 5 6","12"],["1 1 7","7"],["1 4 2 3 4 5","14"],["4 1 2 3 4 5","14"],["3 3 5 0 0 1 9 0 2 3 1","6"],["2 2 1 2 1 1","3"],["3 4 1 2 5 6 3 2 1 4 7 1 2 1","9"],["2 2 0 0 0 0","0"],["3 3 9 1 1 9 1 9 1 1 1","13"],["2 3 5 1 2 1 9 1","9"],["3 2 1 4 2 1 3 1","5"]]],["DP · Medium","LeetCode 300: Read int n (1 <= n <= 500) and n integers. Print the length of the longest STRICTLY increasing subsequence.",[["8 10 9 2 5 3 7 101 18","4"],["6 0 1 0 3 2 3","4"],["7 7 7 7 7 7 7 7","1"],["1 5","1"],["5 5 4 3 2 1","1"],["5 1 2 3 4 5","5"],["6 4 10 4 3 8 9","3"],["9 1 3 6 7 9 4 10 5 6","6"],["4 -5 -3 -4 -1","3"],["7 3 10 2 1 20 4 5","3"],["5 10 20 10 30 20","3"],["6 1 2 1 2 1 2","2"]]],["DP · Strings · Medium","LeetCode 1143: Read two strings text1 and text2. Print the length of their longest common subsequence.",[["abcde ace","3"],["abc abc","3"],["abc def","0"],["bl yby","1"],["ezupkr ubmrapg","2"],["oxcpqrsvwf shmtulqrypy","2"],["aaaa aa","2"],["aggtab gxtxayb","4"],["bsbininm jmjkbkjkv","1"],["a a","1"],["abcdef fedcba","1"],["programming gaming","6"]]],["DP · Strings · Medium","LeetCode 72: Read two lowercase strings word1 and word2. Print the minimum number of operations (insert, delete, or replace one character) required to convert word1 to word2.",[["horse ros","3"],["intention execution","5"],["abc abc","0"],["a b","1"],["kitten sitting","3"],["saturday sunday","3"],["flaw lawn","2"],["sea eat","2"],["zoologicoarchaeologist zoogeologist","10"],["park spake","3"],["abcd bcde","2"],["java javascript","6"]]],["DP · Knapsack · Medium","Classic 0/1 Knapsack: Read int n (items) and int W (capacity), followed by n weights and then n values. Print the maximum total value achievable without exceeding weight W.",[["3 50 10 20 30 60 100 120","220"],["4 7 1 3 4 5 1 4 5 7","9"],["3 4 4 5 1 1 2 3","3"],["1 5 6 100","0"],["1 5 5 100","100"],["4 10 2 3 5 7 10 15 25 40","55"],["3 0 1 2 3 10 20 30","0"],["5 15 3 4 5 6 7 4 5 6 7 8","18"],["4 8 2 3 4 5 3 4 5 6","10"],["3 10 1 2 3 10 20 30","60"],["5 10 5 4 6 3 2 10 40 30 50 20","110"],["2 10 5 5 20 30","50"]]],["DP · Subset Sum · Medium","LeetCode 416: Read int n and n positive ints. Print true if the array can be partitioned into two subsets with equal sum, otherwise false.",[["4 1 5 11 5","true"],["4 1 2 3 5","false"],["1 2","false"],["2 2 2","true"],["2 1 3","false"],["6 2 2 1 1 3 3","true"],["5 3 3 3 4 5","true"],["4 1 2 5 6","true"],["5 1 1 1 1 4","true"],["3 10 20 30","true"],["4 100 100 100 100","true"],["5 2 3 5 7 9","false"]]],["Matrix · Simulation · Medium","LeetCode 54: Read ints r and c, followed by r * c matrix integers (row-major). Print all elements in clockwise spiral order, space-separated.",[["3 3 1 2 3 4 5 6 7 8 9","1 2 3 6 9 8 7 4 5"],["3 4 1 2 3 4 5 6 7 8 9 10 11 12","1 2 3 4 8 12 11 10 9 5 6 7"],["1 1 42","42"],["1 4 1 2 3 4","1 2 3 4"],["4 1 1 2 3 4","1 2 3 4"],["2 2 1 2 3 4","1 2 4 3"],["2 3 1 2 3 4 5 6","1 2 3 6 5 4"],["3 2 1 2 3 4 5 6","1 2 4 6 5 3"],["4 4 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16","1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10"],["2 5 1 2 3 4 5 6 7 8 9 10","1 2 3 4 5 10 9 8 7 6"],["5 2 1 2 3 4 5 6 7 8 9 10","1 2 4 6 8 10 9 7 5 3"],["3 1 9 8 7","9 8 7"]]],["Matrix · Simulation · Medium","LeetCode 48: Read int n and an n x n matrix of ints. Rotate the matrix 90 degrees clockwise and print the rotated n rows (each row space-separated on its own line).",[["3 1 2 3 4 5 6 7 8 9","7 4 1\n8 5 2\n9 6 3"],["4 5 1 9 11 2 4 8 10 13 3 6 7 15 14 12 16","15 13 2 5\n14 3 4 1\n12 6 8 9\n16 7 10 11"],["1 7","7"],["2 1 2 3 4","3 1\n4 2"],["3 0 1 0 1 0 1 0 1 0","0 1 0\n1 0 1\n0 1 0"],["2 -1 -2 -3 -4","-3 -1\n-4 -2"],["3 10 20 30 40 50 60 70 80 90","70 40 10\n80 50 20\n90 60 30"],["4 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16","13 9 5 1\n14 10 6 2\n15 11 7 3\n16 12 8 4"],["2 9 8 7 6","7 9\n6 8"],["3 1 1 1 2 2 2 3 3 3","3 2 1\n3 2 1\n3 2 1"]]],["Matrix · DFS · Medium","LeetCode 200: Read ints r and c, followed by r strings of length c consisting of 1 (land) and 0 (water). Print the number of islands (connected horizontally/vertically).",[["4 5 11110 11010 11000 00000","1"],["4 5 11000 11000 00100 00011","3"],["1 1 1","1"],["1 1 0","0"],["3 3 101 010 101","5"],["3 3 111 010 111","1"],["2 4 1001 1001","2"],["3 4 0000 0000 0000","0"],["3 4 1111 1111 1111","1"],["4 4 1010 0101 1010 0101","8"],["3 5 11011 10001 10101","3"],["2 2 10 01","2"]]]];
+
+/*UI*/
+const $=id=>document.getElementById(id);
+const _saveTimers = {};
+const store={
+  get(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},
+  set(k,v){
+    if(_saveTimers[k]){clearTimeout(_saveTimers[k]);delete _saveTimers[k];}
+    try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}
+    if(window.cloudSync&&(k==='jq_lc'||k==='ed_txt_color'||k==='cur_q_lc')){window.cloudSync.saveDebounced();}
+  },
+  setDebounced(k,v,delay=400){
+    if(_saveTimers[k])clearTimeout(_saveTimers[k]);
+    _saveTimers[k]=setTimeout(()=>{
+      delete _saveTimers[k];
+      try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}
+      if(window.cloudSync&&(k==='jq_lc'||k==='ed_txt_color'||k==='cur_q_lc')){window.cloudSync.saveDebounced();}
+    },delay);
+  },
+  flush(){
+    for(const k in _saveTimers){
+      clearTimeout(_saveTimers[k]);
+      delete _saveTimers[k];
+      if(k==='jq_lc')try{localStorage.setItem('jq_lc',JSON.stringify(ST))}catch(e){}
+      else if(k==='cur_q_lc')try{localStorage.setItem('cur_q_lc',JSON.stringify(cur))}catch(e){}
+    }
+  }
+};
+window.addEventListener('beforeunload',()=>store.flush());
+window.addEventListener('blur',()=>store.flush());
+let cur=store.get('cur_q_lc',0),curFilter='all';
+if(typeof cur!=='number'||cur<0||cur>=Q.length)cur=0;
+const setCur=i=>{
+  store.flush();
+  cur=(i+Q.length)%Q.length;
+  store.set('cur_q_lc',cur);
+};
+const SEED={}; /* built-in answers: {"0":{"c":"java code"}, ...} keyed by question index */
+const ST=store.get('jq_lc',{}),TPL='import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        \n    }\n}\n';
+for(const k in SEED){if(!ST[k]||!ST[k].c)ST[k]=Object.assign({},ST[k],SEED[k])}
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const norm=s=>String(s??'').replace(/\r/g,'').split('\n').map(l=>l.trim().replace(/\s+/g,' ')).filter(l=>l).join('\n');
+function copyToClipboard(text, btn, successText, originalText){
+  const done=()=>{if(btn){btn.textContent=successText;setTimeout(()=>{btn.textContent=originalText},1500)}};
+  const fallback=t=>{
+    try{
+      const ta=document.createElement('textarea');
+      ta.value=t;
+      ta.style.position='fixed';
+      ta.style.left='-9999px';
+      ta.style.top='-9999px';
+      ta.style.opacity='0';
+      document.body.appendChild(ta);
+      ta.focus();ta.select();
+      const ok=document.execCommand('copy');
+      document.body.removeChild(ta);
+      if(ok)done();
+    }catch(e){console.error('Fallback copy error:',e)}
+  };
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(()=>fallback(text));
+  }else{
+    fallback(text);
+  }
+}
+
+function updateStats(){
+  let okCnt=0,starCnt=0;
+  Q.forEach((q,i)=>{
+    const s=ST[i];
+    if(s&&s.m==1)okCnt++;
+    if(s&&s.f)starCnt++;
+  });
+  const unCnt=Q.length-okCnt;
+  if($('cnt-ok'))$('cnt-ok').textContent=okCnt;
+  if($('cnt-un'))$('cnt-un').textContent=unCnt;
+  if($('cnt-star'))$('cnt-star').textContent=starCnt;
+  if($('pstat'))$('pstat').textContent=okCnt+'/'+Q.length+' ('+Math.round(okCnt/Q.length*100)+'%)';
+  if($('pbar'))$('pbar').style.width=(okCnt/Q.length*100)+'%';
+  const allBtn=document.querySelector('[data-f="all"]');if(allBtn)allBtn.textContent='All ('+Q.length+')';
+  const jumpIn=$('jump-in');if(jumpIn){jumpIn.max=Q.length;jumpIn.placeholder='1-'+Q.length;}
+  const brandSub=document.querySelector('.brand-sub');if(brandSub)brandSub.textContent=Q.length+' Core Java Mastery Challenges';
+}
+
+function nav(){
+  const n=$('nav');if(!n)return;
+  updateStats();
+  if(n.children.length!==Q.length){
+    n.replaceChildren();
+    const frag=document.createDocumentFragment();
+    Q.forEach((q,i)=>{
+      const b=el('button','nav-btn',String(i+1));
+      b.title='Q'+(i+1)+': '+q[0];
+      b.onclick=()=>{setCur(i);draw()};
+      frag.append(b);
+    });
+    n.append(frag);
+  }
+  for(let i=0;i<Q.length;i++){
+    const b=n.children[i];
+    const s=ST[i];
+    const isOk=s&&s.m==1,isPart=s&&s.m>0&&s.m<1,isFlag=s&&s.f;
+    let visible=true;
+    if(curFilter=='ok'&&!isOk)visible=false;
+    else if(curFilter=='un'&&isOk)visible=false;
+    else if(curFilter=='star'&&!isFlag)visible=false;
+
+    b.style.display=visible?'':'none';
+
+    let cls='nav-btn';
+    if(i==cur)cls+=' cur';
+    if(isOk)cls+=' ok';
+    else if(isPart)cls+=' part';
+    if(isFlag)cls+=' flagged';
+    if(b.className!==cls)b.className=cls;
+  }
+}
+
+function setupFilters(){
+  const f=$('filters');if(!f)return;
+  f.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.onclick=()=>{
+      f.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      curFilter=btn.getAttribute('data-f');
+      nav();
+    };
+  });
+  const jump=$('jump-in');
+  if(jump){
+    jump.onkeydown=e=>{
+      if(e.key=='Enter'){
+        const val=parseInt(jump.value,10);
+        if(val>=1&&val<=Q.length){
+          setCur(val-1);jump.value='';draw();
+        }
+      }
+    };
+  }
+}
+
+function draw(){
+  nav();
+  const q=Q[cur],s=ST[cur]||{},app=$('app');app.replaceChildren();
+
+  // Sidebar
+  const sb=el('div','sidebar-card');
+  const metaHead=el('div','q-meta-head');
+  metaHead.append(el('div','q-label','Problem'));
+  const numLarge=el('div','q-num-large',String(cur+1));
+  numLarge.append(Object.assign(el('span',0,' / '+Q.length)));
+  metaHead.append(numLarge);
+
+  let stCls='status-badge un',stText='Not Attempted';
+  if(s.m==1){stCls='status-badge ok';stText='✓ Passed';}
+  else if(s.m>0){stCls='status-badge part';stText='Partial ('+(s.m*100).toFixed(0)+'%)';}
+  else if(s.m!=null){stCls='status-badge bad';stText='✗ Failed';}
+  const badge=el('div',stCls,stText);
+
+  const mark=el('div','mark-text',s.m==null?'Marked out of 1.00':'Score: '+s.m.toFixed(2)+' / 1.00');
+
+  const fl=el('button','btn-flag'+(s.f?' active':''),(s.f?'★ Flagged':'☆ Flag Question'));
+  fl.onclick=()=>{s.f=!s.f;ST[cur]=s;store.set('jq_lc',ST);draw()};
+
+  sb.append(metaHead,badge,mark,fl);
+
+  // Main Card
+  const main=el('div','main-card');
+
+  // Topics
+  const tagList=el('div','tag-list');
+  q[0].split('·').map(t=>t.trim()).filter(Boolean).forEach(tag=>{
+    tagList.append(el('span','topic-tag',tag));
+  });
+
+  const title=el('div','q-title',q[1]);
+
+  // Example Cases (Displays first 1 to 3 Sample Cases cleanly)
+  const sampleLimit = Math.min(3, q[2].length);
+  const hiddenCount = q[2].length - sampleLimit;
+  const exCard = el('div', 'ex-card');
+  const exHdr = el('div', 'ex-hdr');
+  exHdr.innerHTML = '<span>Sample Cases (' + sampleLimit + ' shown' + (hiddenCount > 0 ? ', ' + hiddenCount + ' hidden evaluation cases' : '') + ')</span>';
+  
+  const copyExBtn = el('button', 'btn-copy', '📋 Copy Sample 1 Input');
+  const sample1Input = q[2][0][0].trim();
+  copyExBtn.onclick = () => {
+    copyToClipboard(sample1Input, copyExBtn, '✓ Copied!', '📋 Copy Sample 1 Input');
+  };
+  exHdr.append(copyExBtn);
+
+  const exTable = el('table', 'ex-table');
+  const r0 = exTable.insertRow();
+  ['Sample', 'Input', 'Expected Result'].forEach(h => r0.append(el('th', 0, h)));
+  
+  for (let sIdx = 0; sIdx < sampleLimit; sIdx++) {
+    const sRow = exTable.insertRow();
+    const cLabel = sRow.insertCell();
+    cLabel.style.fontWeight = '600';
+    cLabel.style.color = 'var(--mut)';
+    cLabel.textContent = 'Case ' + (sIdx + 1);
+    
+    const cIn = sRow.insertCell();
+    cIn.append(el('pre', 0, q[2][sIdx][0].trim()));
+    
+    const cOut = sRow.insertCell();
+    cOut.append(el('pre', 0, q[2][sIdx][1]));
+  }
+  exCard.append(exHdr, exTable);
+
+  // Editor Box
+  const edBox=el('div','editor-box');
+  const edHdr=el('div','editor-hdr');
+  const fileTab=el('div','file-tab');
+  fileTab.innerHTML='<span style="color:var(--pri)">☕</span> Main.java';
+
+  const edTools=el('div','editor-tools');
+  const autosave=el('span','autosave-pill','✓ Auto-saved');
+  const copyCodeBtn=el('button','btn-tool','Copy');
+  copyCodeBtn.onclick=()=>{
+    copyToClipboard(ta.value, copyCodeBtn, 'Copied!', 'Copy');
+  };
+  const copierBtn=el('button','btn-tool','📋 Copier');
+  copierBtn.title='Copy Question + Code + Test Cases Results';
+  const evaluate=async(code)=>{
+    const cases=q[2],lim=Math.min(3,cases.length);
+    const rs=await runAll(code,cases.map(c=>c[0]));
+    return cases.map(([i,o],idx)=>{
+      const r=rs[idx]||{out:'',err:'Internal error'};
+      const pass=!r.err&&norm(r.out)===norm(o);
+      return{idx:idx+1,isSample:idx<lim,input:i.trim(),expected:o,actual:r.out+(r.err?'\n'+r.err:''),pass,err:r.err||null};
+    });
+  };
+  let lastEval=null;
+  const getResults=async()=>{
+    const code=ta.value;
+    if(lastEval&&lastEval.code===code)return lastEval.results;
+    const results=await evaluate(code);
+    lastEval={code,results};
+    return results;
+  };
+  const getFullSubmissionText=(testResults)=>{
+    const code = ta.value;
+    const sampleLimit = Math.min(3, q[2].length);
+    const hiddenTotal = q[2].length - sampleLimit;
+    const ok = testResults.filter(t=>t.pass).length;
+    const isAllPass = (ok === q[2].length);
+    let txt = '';
+    // 1. Question description
+    txt += q[1].trim() + '\n';
+    // 2. Sample cases table
+    txt += 'Sample Cases (' + sampleLimit + ' shown' + (hiddenTotal > 0 ? ', ' + hiddenTotal + ' hidden evaluation cases' : '') + ')\n';
+    txt += '📋 Copy Sample 1 Input\n';
+    txt += 'Sample\tInput\tExpected Result\n';
+    for (let sIdx = 0; sIdx < sampleLimit; sIdx++) {
+      txt += 'Case ' + (sIdx + 1) + '\t\n' + q[2][sIdx][0].trim() + '\n' + q[2][sIdx][1] + '\n';
+    }
+    txt += '\n';
+    // 3. User code
+    txt += code.trim() + '\n\n';
+    // 4. Test cases evaluation banner
+    if (isAllPass) {
+      txt += '🎉\nAll ' + q[2].length + ' test cases passed! (1.00 / 1.00)\n';
+      txt += '(' + sampleLimit + ' Sample + ' + hiddenTotal + ' Hidden)\n';
+    } else {
+      txt += '❌\nPassed ' + ok + ' of ' + q[2].length + ' test cases\n';
+      txt += '(' + (q[2].length - ok) + ' failed)\n';
+    }
+    // 5. Sample test cases evaluation table
+    txt += 'Sample Test Cases Evaluation (' + sampleLimit + ')\n';
+    txt += 'Case\tStatus\tInput\tExpected\tYour Output\n';
+    testResults.slice(0, sampleLimit).forEach(tr => {
+      txt += 'Sample ' + tr.idx + '\t' + (tr.pass ? '✓ Pass' : '✗ Fail') + '\t\n';
+      txt += tr.input + '\n';
+      txt += tr.expected + '\n';
+      txt += tr.actual + '\n';
+    });
+    // 6. Hidden cases summary
+    if (hiddenTotal > 0) {
+      const hiddenPassCount = testResults.slice(sampleLimit).filter(r => r.pass).length;
+      if (hiddenPassCount === hiddenTotal) {
+        txt += '🛡️\n\nAll ' + hiddenTotal + ' hidden edge cases passed ✓';
+      } else {
+        txt += '⚠️\n\nHidden Test Suite:\n' + hiddenPassCount + ' of ' + hiddenTotal + ' hidden edge cases passed';
+      }
+    }
+    return txt.trim();
+  };
+  copierBtn.onclick=async()=>{
+    try {
+      const fullText = getFullSubmissionText(await getResults());
+      copyToClipboard(fullText, copierBtn, '✓ Copied!', '📋 Copier');
+    } catch (err) {
+      console.error(err);
+      copyToClipboard(ta.value, copierBtn, '✓ Copied Code!', '📋 Copier');
+    }
+  };
+  const resetBtn=el('button','btn-tool','Reset');
+  resetBtn.onclick=()=>{
+    if(confirm('Reset code to initial template?')){
+      ta.value=TPL;ta.oninput();
+    }
+  };
+
+  const colorWrap=el('label','btn-tool');
+  colorWrap.title='Choose text color for code editor';
+  colorWrap.style.cssText='display:inline-flex;align-items:center;gap:5px;cursor:pointer;';
+  const colorLabel=el('span','','🎨 Color');
+  const colorInput=document.createElement('input');
+  colorInput.type='color';
+  colorInput.title='Pick custom text color';
+  const savedTxtColor=store.get('ed_txt_color','');
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  colorInput.value=(savedTxtColor&&savedTxtColor.startsWith('#')&&savedTxtColor.length===7)?savedTxtColor:(isDark?'#f8fafc':'#0f172a');
+  colorInput.style.cssText='width:18px;height:18px;padding:0;border:1px solid var(--line);border-radius:4px;cursor:pointer;background:none;vertical-align:middle;';
+
+  const colorSel=document.createElement('select');
+  colorSel.title='Preset colors';
+  colorSel.style.cssText='font-size:11px;font-family:inherit;background:transparent;color:inherit;border:none;outline:none;cursor:pointer;';
+  const presets=[
+    {name:'Theme Default',value:''},
+    {name:'White',value:'#f8fafc'},
+    {name:'Green',value:'#4ade80'},
+    {name:'Cyan',value:'#38bdf8'},
+    {name:'Amber',value:'#facc15'},
+    {name:'Orange',value:'#fb923c'},
+    {name:'Purple',value:'#c084fc'},
+    {name:'Coral',value:'#f43f5e'}
+  ];
+  presets.forEach(p=>{
+    const opt=document.createElement('option');
+    opt.value=p.value;
+    opt.textContent=p.name;
+    opt.style.background='var(--surface)';
+    opt.style.color='var(--ink)';
+    if(savedTxtColor===p.value||(!savedTxtColor&&p.value==='')) opt.selected=true;
+    colorSel.appendChild(opt);
+  });
+
+  const applyColor=c=>{
+    if(c){
+      document.documentElement.style.setProperty('--ed-text',c);
+      store.set('ed_txt_color',c);
+      colorInput.value=c;
+    }else{
+      document.documentElement.style.removeProperty('--ed-text');
+      store.set('ed_txt_color','');
+      const curDark=document.documentElement.getAttribute('data-theme')==='dark';
+      colorInput.value=curDark?'#f8fafc':'#0f172a';
+    }
+  };
+
+  colorInput.oninput=()=>{
+    applyColor(colorInput.value);
+    let matched=false;
+    for(let opt of colorSel.options){
+      if(opt.value.toLowerCase()===colorInput.value.toLowerCase()){opt.selected=true;matched=true;break;}
+    }
+    if(!matched) colorSel.value='';
+  };
+
+  colorSel.onchange=()=>{
+    applyColor(colorSel.value);
+  };
+
+  colorWrap.append(colorLabel,colorInput,colorSel);
+
+  edTools.append(autosave,colorWrap,copyCodeBtn,copierBtn,resetBtn);
+  edHdr.append(fileTab,edTools);
+
+  const ed=el('div','ed'),gut=el('div','gut'),ta=el('textarea');
+  ta.value=s.c||TPL;ta.spellcheck=false;ta.setAttribute('aria-label','Java code');
+  let lastLines=0;
+  const num=()=>{
+    const val=ta.value;
+    let lines=1;
+    for(let i=0;i<val.length;i++){
+      if(val.charCodeAt(i)===10)lines++;
+    }
+    if(lines!==lastLines){
+      lastLines=lines;
+      let res='';
+      for(let i=1;i<=lines;i++)res+=(i===1?'':'\n')+i;
+      gut.textContent=res;
+    }
+  };
+  num();
+  ta.oninput=()=>{num();s.c=ta.value;ST[cur]=s;store.setDebounced('jq',ST,400)};
+  ta.onblur=()=>store.flush();
+  ta.onscroll=()=>{gut.scrollTop=ta.scrollTop};
+  gut.onwheel=e=>{ta.scrollTop+=e.deltaY};
+
+  ta.onkeydown=e=>{
+    const a=ta.selectionStart,b=ta.selectionEnd,val=ta.value;
+    if((e.ctrlKey||e.metaKey)&&e.key=='Enter'){
+      e.preventDefault();chk.click();return;
+    }
+    const pairs={'{':'}','(':')','[':']','"':'"',"'":"'"};
+    const closers=['}',')',']','"',"'"];
+    if(pairs[e.key]&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+      e.preventDefault();
+      const open=e.key,close=pairs[e.key];
+      if(a!==b){
+        const sel=val.slice(a,b);
+        ta.setRangeText(open+sel+close,a,b,'preserve');
+        ta.selectionStart=a+1;
+        ta.selectionEnd=b+1;
+      }else{
+        ta.setRangeText(open+close,a,b,'preserve');
+        ta.selectionStart=ta.selectionEnd=a+1;
+      }
+      ta.oninput();
+      return;
+    }
+    if(closers.includes(e.key)&&a===b&&val[a]===e.key&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+      e.preventDefault();
+      ta.selectionStart=ta.selectionEnd=a+1;
+      return;
+    }
+    if(e.key=='Backspace'&&a===b&&a>0){
+      const prev=val[a-1],next=val[a];
+      if(pairs[prev]&&pairs[prev]===next){
+        e.preventDefault();
+        ta.setRangeText('',a-1,a+1,'preserve');
+        ta.selectionStart=ta.selectionEnd=a-1;
+        ta.oninput();
+        return;
+      }
+    }
+    if((e.key=='Enter'||e.key=='Tab')&&a===b&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+      const lineStart=val.lastIndexOf('\n',a-1)+1,beforeCursor=val.slice(lineStart,a);
+      const match=beforeCursor.match(/\b([a-zA-Z_]\w*)$/);
+      if(match){
+        const word=match[1],wordStart=a-word.length,lower=word.toLowerCase();
+        const prevChar=wordStart>0?val[wordStart-1]:'\n';
+        if(/[\s;{}(),]/.test(prevChar)){
+          if(lower=='sout'){
+            e.preventDefault();
+            ta.setRangeText('System.out.println();',wordStart,a,'preserve');
+            ta.selectionStart=ta.selectionEnd=wordStart+19;
+            ta.oninput();return;
+          }else if(lower=='souf'){
+            e.preventDefault();
+            ta.setRangeText('System.out.printf("");',wordStart,a,'preserve');
+            ta.selectionStart=ta.selectionEnd=wordStart+19;
+            ta.oninput();return;
+          }else if(lower=='serr'){
+            e.preventDefault();
+            ta.setRangeText('System.err.println();',wordStart,a,'preserve');
+            ta.selectionStart=ta.selectionEnd=wordStart+19;
+            ta.oninput();return;
+          }else if(lower=='psvm'||lower=='main'){
+            e.preventDefault();
+            const indent=(val.slice(lineStart,wordStart).match(/^[ \t]*/)||[''])[0];
+            const replacement='public static void main(String[] args) {\n'+indent+'    \n'+indent+'}';
+            ta.setRangeText(replacement,wordStart,a,'preserve');
+            ta.selectionStart=ta.selectionEnd=wordStart+('public static void main(String[] args) {\n'+indent+'    ').length;
+            ta.oninput();return;
+          }
+        }
+      }
+    }
+    if(e.key=='Tab'){
+      e.preventDefault();ta.setRangeText('    ',a,b,'end');ta.oninput();
+    }else if(e.key=='Enter'){
+      e.preventDefault();
+      const lineStart=val.lastIndexOf('\n',a-1)+1,curLine=val.slice(lineStart,a),indent=(curLine.match(/^[ \t]*/)||[''])[0],trimmed=curLine.trimEnd();
+      if(trimmed.endsWith('{')&&val[b]=='}'){
+        ta.setRangeText('\n'+indent+'    \n'+indent,a,b,'preserve');
+        ta.selectionStart=ta.selectionEnd=a+1+indent.length+4;
+      }else{
+        const add=trimmed.endsWith('{')?'    ':'';
+        ta.setRangeText('\n'+indent+add,a,b,'end');
+      }
+      ta.oninput();
+    }else if(e.key=='Backspace'&&a==b&&a>=4&&val.slice(a-4,a)=='    '){
+      const lineStart=val.lastIndexOf('\n',a-1)+1;
+      if(/^\s*$/.test(val.slice(lineStart,a))){
+        e.preventDefault();ta.setRangeText('',a-4,a,'end');ta.oninput();
+      }
+    }
+  };
+
+  ed.append(gut,ta);
+  edBox.append(edHdr,ed);
+
+  // Controls Row
+  const ctrlRow=el('div','controls-row');
+  const ctrlLeft=el('div','ctrl-left');
+  const chk=el('button','btn-main','▶ Run & Check');
+  const kbdTip=el('span','kbd-hint');
+  kbdTip.innerHTML='or <kbd>Ctrl</kbd> + <kbd>Enter</kbd> · <span title="Type sout, souf, serr, or psvm and press Enter / Tab">IntelliJ: <kbd>sout</kbd> + <kbd>Enter</kbd></span>';
+  ctrlLeft.append(chk,kbdTip);
+
+  const copySubBtn=el('button','btn-main btn-copier','📋 Copier');
+  copySubBtn.style.cssText='background:var(--surface-alt);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow-sm);';
+  copySubBtn.title='Copy Question + Code + Test Cases Results';
+  copySubBtn.onclick=async()=>{
+    try {
+      await chk.onclick();
+      const fullText = getFullSubmissionText(await getResults());
+      copyToClipboard(fullText, copySubBtn, '✓ Copied!', '📋 Copier');
+    } catch (err) {
+      console.error(err);
+      copyToClipboard(ta.value, copySubBtn, '✓ Copied Code!', '📋 Copier');
+    }
+  };
+  ctrlLeft.append(copySubBtn);
+
+  const ctrlRight=el('div','ctrl-left');
+  const prevBtn=el('button','btn-step','← Previous');
+  prevBtn.onclick=()=>{setCur(cur-1);draw();window.scrollTo({top:0,behavior:'smooth'})};
+  const nextBtn=el('button','btn-step','Next →');
+  nextBtn.onclick=()=>{setCur(cur+1);draw();window.scrollTo({top:0,behavior:'smooth'})};
+  ctrlRight.append(prevBtn,nextBtn);
+
+  ctrlRow.append(ctrlLeft,ctrlRight);
+
+  // Results (Evaluates ALL test cases, reveals any failed test case, shows sample cases)
+  const res = el('div', 'res-card');
+  const runCheck = async (isAuto = false) => {
+    if (chk.disabled) return;
+    const myCur = cur;               // question this run belongs to (user may navigate away meanwhile)
+    const code = ta.value;
+    const chkLabel = chk.textContent;
+    if (!isAuto) {
+      chk.disabled = true; chk.textContent = '⏳ Running…';
+    } else {
+      res.innerHTML = '<div style="color:var(--mut);font-size:12px;padding:8px 4px;">⚡ Loading test results...</div>';
+    }
+    let testResults;
+    try { testResults = await getResults(); }
+    finally {
+      if (!isAuto) { chk.disabled = false; chk.textContent = chkLabel; }
+    }
+    if (myCur !== cur) return;
+
+    const sampleLimit = Math.min(3, q[2].length);
+    const hiddenTotal = q[2].length - sampleLimit;
+    const ok = testResults.filter(t => t.pass).length;
+    const firstFailed = testResults.find(t => !t.pass) || null;
+    const errT = testResults.find(t => t.err);
+    const err = errT ? errT.err : null;
+    res.replaceChildren();
+
+    s.c = code;
+    s.m = ok / q[2].length;
+    ST[myCur] = s;
+    store.set('jq_lc', ST);
+    nav();
+
+    const isAllPass = (ok === q[2].length);
+
+    // 1. Result summary banner
+    const banner = el('div', 'sum-banner ' + (isAllPass ? 'pass' : 'fail'));
+    if (isAllPass) {
+      banner.innerHTML = '🎉 <b>All ' + q[2].length + ' test cases passed! (1.00 / 1.00)</b> <span style="font-size:12px;opacity:0.85;margin-left:8px;">(' + sampleLimit + ' Sample + ' + hiddenTotal + ' Hidden)</span>';
+    } else {
+      banner.innerHTML = '❌ <b>Passed ' + ok + ' of ' + q[2].length + ' test cases</b> <span style="font-size:12px;opacity:0.85;margin-left:8px;">(' + (q[2].length - ok) + ' failed)</span>';
+    }
+    res.append(banner);
+
+    // 2. Runtime Error display if any
+    if (err) {
+      const errBox = el('div', 'err-box');
+      errBox.append(el('div', 'err-box-hdr', 'Runtime / Compiler Error'));
+      errBox.append(el('pre', 0, err));
+      res.append(errBox);
+    }
+
+    // 3. Highlight the EXACT Failed Test Case (Input, Expected, Got)
+    if (firstFailed) {
+      const failCard = el('div', 'fail-detail-card');
+      const failHdr = el('div', 'fail-detail-hdr');
+      failHdr.innerHTML = '<b>❌ Failed on Test Case #' + firstFailed.idx + '</b> <span class="badge-hidden">' + (firstFailed.isSample ? 'Sample Case' : 'Hidden Edge Case') + '</span>';
+
+      const diffGrid = el('div', 'diff-grid');
+
+      const bIn = el('div', 'diff-col');
+      bIn.innerHTML = '<div class="diff-lbl">Input</div>';
+      bIn.append(el('pre', 'diff-pre', firstFailed.input || '(empty input)'));
+
+      const bExp = el('div', 'diff-col');
+      bExp.innerHTML = '<div class="diff-lbl">Expected Output</div>';
+      bExp.append(el('pre', 'diff-pre ok-text', firstFailed.expected));
+
+      const bAct = el('div', 'diff-col');
+      bAct.innerHTML = '<div class="diff-lbl">Your Output</div>';
+      bAct.append(el('pre', 'diff-pre bad-text', firstFailed.actual || '(no output)'));
+
+      diffGrid.append(bIn, bExp, bAct);
+      failCard.append(failHdr, diffGrid);
+      res.append(failCard);
+    }
+
+    // 4. Sample Test Cases Evaluation Table
+    const sampleHdr = el('div', 'section-subhdr');
+    sampleHdr.innerHTML = '<span>Sample Test Cases Evaluation (' + sampleLimit + ')</span>';
+    res.append(sampleHdr);
+
+    const t = el('table', 'res-table');
+    const h = t.insertRow();
+    ['Case', 'Status', 'Input', 'Expected', 'Your Output'].forEach(x => h.append(el('th', 0, x)));
+
+    testResults.slice(0, sampleLimit).forEach(tr => {
+      const row = t.insertRow();
+      row.className = tr.pass ? 'p' : 'f';
+      row.insertCell().textContent = 'Sample ' + tr.idx;
+
+      const cStat = row.insertCell();
+      cStat.innerHTML = '<span class="status-pill ' + (tr.pass ? 'p' : 'f') + '">' + (tr.pass ? '✓ Pass' : '✗ Fail') + '</span>';
+
+      [tr.input, tr.expected, tr.actual].forEach(v => {
+        const c = row.insertCell();
+        c.append(el('pre', 0, v));
+      });
+    });
+    res.append(t);
+
+    // 5. Hidden Test Suite Status Bar
+    if (hiddenTotal > 0) {
+      const hiddenPassCount = testResults.slice(sampleLimit).filter(r => r.pass).length;
+      const hiddenSummary = el('div', 'hidden-summary-bar ' + (hiddenPassCount === hiddenTotal ? 'pass' : 'fail'));
+      hiddenSummary.innerHTML = (hiddenPassCount === hiddenTotal)
+        ? '🛡️ <b>Hidden Test Suite:</b> All ' + hiddenTotal + ' hidden edge cases passed ✓'
+        : '⚠️ <b>Hidden Test Suite:</b> ' + hiddenPassCount + ' of ' + hiddenTotal + ' hidden edge cases passed';
+      res.append(hiddenSummary);
+    }
+
+    mark.textContent = 'Score: ' + s.m.toFixed(2) + ' / 1.00';
+    badge.className = 'status-badge ' + (s.m == 1 ? 'ok' : s.m > 0 ? 'part' : 'bad');
+    badge.textContent = s.m == 1 ? '✓ Passed' : s.m > 0 ? 'Partial (' + (s.m * 100).toFixed(0) + '%)' : '✗ Failed';
+  };
+  chk.onclick = () => runCheck(false);
+
+  main.append(tagList,title,exCard,edBox,ctrlRow,res);
+
+  const wrap=el('div','q-wrap');
+  wrap.append(sb,main);
+  app.append(wrap);
+
+  if (s.m != null) {
+    runCheck(true);
+  }
+}
+
+function initTheme(){
+  const th=$('th');if(!th)return;
+  const savedTheme = store.get('theme', 'light');
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  const updateIcon=()=>{
+    const d=document.documentElement.getAttribute('data-theme')||'light';
+    th.textContent=d=='dark'?'☀️':'🌙';
+  };
+  updateIcon();
+  th.onclick=()=>{
+    const cur=document.documentElement.getAttribute('data-theme')||'light';
+    const nxt=cur=='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',nxt);
+    store.set('theme', nxt);
+    updateIcon();
+  };
+}
+
+const cloudSync = {
+  db: null,
+  connected: false,
+  timer: null,
+  lastLocalUpdate: 0,
+  lastRemoteUpdate: 0,
+  fbApp: null,
+
+  parseConfig(raw) {
+    if (!raw) return null;
+    raw = raw.trim();
+    try {
+      const obj = JSON.parse(raw);
+      if (obj.apiKey && (obj.projectId || obj.databaseURL)) return obj;
+    } catch(e) {}
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (match) {
+      try {
+        const fn = new Function('return (' + match[0] + ')');
+        const obj = fn();
+        if (obj && obj.apiKey) return obj;
+      } catch(e) {}
+    }
+    return null;
+  },
+
+  defaultConfig: {
+    apiKey: "AIzaSyCudxoUA_Kygf7froxkCYcgYdC75VmqgHM",
+    authDomain: "codeeditor-b26d8.firebaseapp.com",
+    databaseURL: "https://codeeditor-b26d8-default-rtdb.firebaseio.com",
+    projectId: "codeeditor-b26d8",
+    storageBucket: "codeeditor-b26d8.firebasestorage.app",
+    messagingSenderId: "353675018201",
+    appId: "1:353675018201:web:366d581482f4f7d1b763c8",
+    measurementId: "G-CYLTECYQTH"
+  },
+
+  getProfile() {
+    const p = store.get('fb_profile', 'default') || 'default';
+    return p.replace(/[^a-zA-Z0-9_-]/g, '_');
+  },
+
+  state: 'off', msg: '', _ref: null, sdkPromise: null,
+  T: { sdk: 12000, reach: 10000, write: 10000 },
+
+  withTimeout(p, ms, msg) {
+    let t;
+    return Promise.race([p, new Promise((_, rej) => { t = setTimeout(() => rej(new Error(msg)), ms); })]).finally(() => clearTimeout(t));
+  },
+
+  loadSDK() {
+    if (window.firebase && firebase.database) return Promise.resolve();
+    if (this.sdkPromise) return this.sdkPromise;
+    const load = src => new Promise((res, rej) => {
+      const el = document.createElement('script');
+      el.src = src; el.onload = res;
+      el.onerror = () => rej(new Error('Could not load the Firebase library. Check your internet connection or ad-blocker.'));
+      document.head.appendChild(el);
+    });
+    this.sdkPromise = this.withTimeout(
+      load('https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js')
+        .then(() => load('https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js')),
+      this.T.sdk, 'Firebase library took too long to load. Check your internet connection.'
+    ).catch(e => { this.sdkPromise = null; throw e; });
+    return this.sdkPromise;
+  },
+
+  detach() {
+    try { if (this._ref) this._ref.off(); } catch (e) {}
+    this._ref = null;
+  },
+
+  setState(state, msg) {
+    this.state = state; this.msg = msg || '';
+    this.connected = (state === 'on');
+    this.updateUI(state === 'error' ? this.msg : undefined);
+  },
+
+  /* mode: 'startup' (quiet, remote may update local) | 'manual' (verifies, merges cloud + local, never wipes cloud) */
+  async connect(cfg, mode) {
+    this.detach();
+    this.setState('connecting', 'Loading Firebase…');
+    try {
+      await this.loadSDK();
+      cfg = Object.assign({}, cfg);
+      if (!cfg.databaseURL && cfg.projectId) cfg.databaseURL = 'https://' + cfg.projectId + '-default-rtdb.firebaseio.com';
+      if (!cfg.databaseURL) throw new Error('Config has no databaseURL. Create a Realtime Database in Firebase first.');
+      if (firebase.apps.length) { try { await firebase.app().delete(); } catch (e) {} }
+      this.fbApp = firebase.initializeApp(cfg);
+      this.db = firebase.database();
+
+      this.setState('connecting', 'Contacting database…');
+      await this.withTimeout(new Promise(res => {
+        const r = this.db.ref('.info/connected');
+        const h = r.on('value', snap => { if (snap.val() === true) { r.off('value', h); res(); } });
+      }), this.T.reach, 'Cannot reach the database server. Check your internet and the databaseURL in your config.');
+
+      let merged = 0;
+      if (mode === 'manual') {
+        this.setState('connecting', 'Checking access & merging your progress…');
+        const ref = this.db.ref('quiz_users/' + this.getProfile());
+        let snap;
+        try {
+          snap = await this.withTimeout(ref.once('value'), this.T.write, 'The database did not answer. Check the Realtime Database rules (test mode).');
+        } catch (e) {
+          if (/permission/i.test(e.message)) throw new Error('Permission denied. In Firebase set the Realtime Database rules to allow read/write (test mode).');
+          throw e;
+        }
+        const data = snap.val();
+        if (data && data.ST) {
+          const tpl = TPL.trim();
+          Object.keys(data.ST).forEach(k => {
+            const c = data.ST[k]; if (!c) return;
+            const l = ST[k];
+            if (!l || !l.c || l.c.trim() === tpl) { ST[k] = Object.assign({}, c, l && l.f ? { f: l.f } : {}); merged++; }
+          });
+          try { localStorage.setItem('jq_lc', JSON.stringify(ST)); } catch (e) {}
+        }
+        this.connected = true; this.state = 'on';
+        const ok = await this.pushToCloud();
+        if (!ok) throw new Error(this.lastError || 'Could not save to the database.');
+        draw();
+      }
+      this.listen();
+      this.setState('on', merged ? ('Connected. Loaded ' + merged + ' answers from the cloud.') : '');
+      return { ok: true, merged };
+    } catch (e) {
+      console.warn('Firebase connect error:', e);
+      this.detach();
+      this.setState('error', e.message || String(e));
+      return { ok: false, error: e.message };
+    }
+  },
+
+  init() {
+    const rawCfg = store.get('fb_cfg', this.defaultConfig);
+    if (!rawCfg) { this.updateUI(); return; }
+    const cfg = this.parseConfig(typeof rawCfg === 'string' ? rawCfg : JSON.stringify(rawCfg));
+    if (!cfg) { this.updateUI(); return; }
+    this.connect(cfg, 'startup');
+  },
+
+  listen() {
+    if (!this.db) return;
+    const profile = this.getProfile();
+    this.detach();
+    this._ref = this.db.ref('quiz_users/' + profile);
+    this._ref.on('value', snap => {
+      const data = snap.val();
+      if (!data) return;
+      if (data.updated && data.updated > this.lastLocalUpdate) {
+        this.lastRemoteUpdate = data.updated;
+        if (data.ST) {
+          Object.assign(ST, data.ST);
+          try { localStorage.setItem('jq_lc', JSON.stringify(ST)); } catch(e) {}
+        }
+        if (data.ed_txt_color !== undefined) {
+          try { localStorage.setItem('ed_txt_color', JSON.stringify(data.ed_txt_color)); } catch(e) {}
+          if (data.ed_txt_color) {
+            document.documentElement.style.setProperty('--ed-text', data.ed_txt_color);
+          } else {
+            document.documentElement.style.removeProperty('--ed-text');
+          }
+        }
+        nav();
+        const ta = document.querySelector('textarea');
+        if (ta && ST[cur] && ST[cur].c !== undefined && ta.value !== ST[cur].c) {
+          ta.value = ST[cur].c;
+          const gut = document.querySelector('.gut');
+          if (gut) gut.textContent = ta.value.split('\n').map((_,i)=>i+1).join('\n');
+        }
+      }
+    }, err => {
+      console.warn('Firebase listen error:', err);
+      this.setState('error', 'Permission denied. Set your Realtime Database rules to allow read/write (test mode).');
+    });
+  },
+
+  saveDebounced() {
+    if (!this.connected || !this.db) return;
+    clearTimeout(this.timer);
+    this.setBtnStatus('syncing');
+    this.timer = setTimeout(() => {
+      this.pushToCloud();
+    }, 1200);
+  },
+
+  async pushToCloud() {
+    if (!this.connected || !this.db) return false;
+    const profile = this.getProfile();
+    const now = Date.now();
+    this.lastLocalUpdate = now;
+    try {
+      await this.withTimeout(this.db.ref('quiz_users/' + profile).set({
+        ST: JSON.parse(JSON.stringify(ST)),   // strips undefined values Firebase rejects
+        cur_q: cur,
+        ed_txt_color: store.get('ed_txt_color', '') || '',
+        updated: now
+      }), this.T.write, 'Saving timed out. Check your internet connection and database rules.');
+      this.lastError = '';
+      this.setBtnStatus('synced');
+      return true;
+    } catch (e) {
+      console.error('Firebase save error:', e);
+      this.lastError = /permission/i.test(e.message) ? 'Permission denied. Set the Realtime Database rules to allow read/write.' : e.message;
+      this.setBtnStatus('error');
+      return false;
+    }
+  },
+
+  async pullFromCloud() {
+    if (!this.connected || !this.db) { alert('Not connected to Firebase.'); return false; }
+    const profile = this.getProfile();
+    try {
+      const snap = await this.withTimeout(this.db.ref('quiz_users/' + profile).once('value'), this.T.write, 'The database did not answer in time.');
+      const data = snap.val();
+      if (data && data.ST) {
+        Object.keys(data.ST).forEach(k => { if (data.ST[k]) ST[k] = data.ST[k]; });
+        try { localStorage.setItem('jq_lc', JSON.stringify(ST)); } catch(e) {}
+        if (data.ed_txt_color !== undefined) {
+          try { localStorage.setItem('ed_txt_color', JSON.stringify(data.ed_txt_color)); } catch(e) {}
+          if (data.ed_txt_color) document.documentElement.style.setProperty('--ed-text', data.ed_txt_color);
+          else document.documentElement.style.removeProperty('--ed-text');
+        }
+        if (typeof data.cur_q === 'number' && data.cur_q >= 0 && data.cur_q < Q.length) {
+          cur = data.cur_q;
+          try { localStorage.setItem('cur_q_lc', JSON.stringify(cur)); } catch(e) {}
+        }
+        draw();
+        alert('✓ Successfully pulled progress from Firebase!');
+        return true;
+      }
+      alert('No data found in cloud for profile: ' + profile);
+      return false;
+    } catch(e) {
+      alert('Error pulling from cloud: ' + e.message);
+      return false;
+    }
+  },
+
+  setBtnStatus(status) {
+    const btn = $('cloudBtn');
+    if (!btn) return;
+    const busy = this.state === 'connecting' || status === 'syncing';
+    btn.classList.toggle('spin', busy);
+    if (this.state === 'connecting') {
+      btn.textContent = '🔄'; btn.title = 'Connecting to Firebase…';
+    } else if (!this.connected) {
+      btn.textContent = this.state === 'error' ? '⚠️' : '☁️';
+      btn.title = this.state === 'error' ? ('Firebase: ' + this.msg) : 'Firebase Cloud Sync (Not Connected)';
+    } else if (status === 'syncing') {
+      btn.textContent = '🔄'; btn.title = 'Syncing with Firebase...';
+    } else if (status === 'error') {
+      btn.textContent = '⚠️'; btn.title = 'Firebase Sync Error: ' + (this.lastError || '');
+    } else {
+      btn.textContent = '☁️✓'; btn.title = 'Firebase Connected (' + this.getProfile() + ')';
+    }
+  },
+
+  updateUI(customErr) {
+    this.setBtnStatus(this.connected ? 'synced' : 'disconnected');
+    const badge = $('syncStatusBadge');
+    const pushBtn = $('syncPushBtn');
+    const pullBtn = $('syncPullBtn');
+    const discBtn = $('syncDisconnectBtn');
+    if (!badge) return;
+    const show = (b, on) => { if (b) b.style.display = on ? 'inline-block' : 'none'; };
+
+    if (this.state === 'connecting') {
+      badge.className = 'sync-badge busy';
+      badge.replaceChildren();
+      const sp = document.createElement('span'); sp.className = 'spinner';
+      badge.append(sp, this.msg || 'Connecting…');
+      show(pushBtn, false); show(pullBtn, false); show(discBtn, false);
+    } else if (customErr) {
+      badge.className = 'sync-badge err';
+      badge.textContent = '⚠️ ' + customErr;
+      show(pushBtn, false); show(pullBtn, false); show(discBtn, true);
+    } else if (this.connected) {
+      badge.className = 'sync-badge ok';
+      badge.textContent = '🟢 Connected · Profile: ' + this.getProfile() + (this.msg ? ' · ' + this.msg : '');
+      show(pushBtn, true); show(pullBtn, true); show(discBtn, true);
+    } else {
+      badge.className = 'sync-badge off';
+      badge.textContent = '⚪ Not Connected';
+      show(pushBtn, false); show(pullBtn, false); show(discBtn, false);
+    }
+  }
+};
+window.cloudSync = cloudSync;
+
+function initCloudModal() {
+  const modal = $('cloudModal');
+  const openBtn = $('cloudBtn');
+  const closeBtn = $('cloudCloseBtn');
+  const connectBtn = $('syncConnectBtn');
+  const pushBtn = $('syncPushBtn');
+  const pullBtn = $('syncPullBtn');
+  const discBtn = $('syncDisconnectBtn');
+  const profileInput = $('syncProfileInput');
+  const configInput = $('syncConfigInput');
+
+  if (!modal || !openBtn) return;
+
+  openBtn.onclick = () => {
+    profileInput.value = store.get('fb_profile', 'default');
+    const savedCfg = store.get('fb_cfg', cloudSync.defaultConfig);
+    configInput.value = typeof savedCfg === 'string' ? savedCfg : (savedCfg ? JSON.stringify(savedCfg, null, 2) : '');
+    cloudSync.updateUI();
+    modal.classList.add('open');
+  };
+
+  closeBtn.onclick = () => modal.classList.remove('open');
+  modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('open'); };
+
+  const busy = (btn, text) => {
+    const old = btn.innerHTML;
+    btn.disabled = true; btn.classList.add('is-busy');
+    btn.replaceChildren();
+    const sp = document.createElement('span'); sp.className = 'spinner';
+    btn.append(sp, text);
+    return () => { btn.disabled = false; btn.classList.remove('is-busy'); btn.innerHTML = old; };
+  };
+
+  connectBtn.onclick = async () => {
+    if (connectBtn.disabled) return;
+    const raw = configInput.value.trim();
+    if (!raw) { cloudSync.updateUI('Paste your Firebase config first.'); return; }
+    const parsed = cloudSync.parseConfig(raw);
+    if (!parsed) { cloudSync.updateUI('Could not read that config. Paste the firebaseConfig object (JSON or JavaScript).'); return; }
+    const profile = (profileInput.value.trim() || 'default').replace(/[^a-zA-Z0-9_-]/g, '_');
+    store.set('fb_profile', profile);
+    const done = busy(connectBtn, 'Connecting…');
+    try {
+      const r = await cloudSync.connect(parsed, 'manual');
+      if (r.ok) store.set('fb_cfg', parsed);
+    } finally { done(); }
+  };
+
+  if (pushBtn) pushBtn.onclick = async () => {
+    if (pushBtn.disabled) return;
+    const done = busy(pushBtn, 'Pushing…');
+    try {
+      const ok = await cloudSync.pushToCloud();
+      if (ok) alert('✓ Local progress pushed to Firebase cloud!');
+      else cloudSync.updateUI(cloudSync.lastError || 'Push failed.');
+    } finally { done(); }
+  };
+
+  if (pullBtn) pullBtn.onclick = async () => {
+    if (pullBtn.disabled) return;
+    if (!confirm('Pull cloud progress? This will update your local code and quiz results with the cloud data.')) return;
+    const done = busy(pullBtn, 'Pulling…');
+    try { await cloudSync.pullFromCloud(); } finally { done(); }
+  };
+
+  if (discBtn) discBtn.onclick = () => {
+    if (confirm('Disconnect Firebase cloud sync? Your local data will remain intact.')) {
+      localStorage.removeItem('fb_cfg');
+      cloudSync.detach();
+      cloudSync.db = null;
+      configInput.value = '';
+      cloudSync.setState('off');
+    }
+  };
+}
+
+function setupBackup(){
+  const flash=(b,t)=>{const o=b.textContent;b.textContent=t;setTimeout(()=>b.textContent=o,1500)};
+  $('expBtn').onclick=()=>{
+    store.flush();
+    const out={};
+    for(const k in ST){if(ST[k]&&(ST[k].c&&ST[k].c.trim()!==TPL.trim()||ST[k].f))out[k]={c:ST[k].c,m:ST[k].m,f:ST[k].f}}
+    const json=JSON.stringify(out,null,1);
+    try{
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+      a.download='java_quiz_answers.json';document.body.appendChild(a);a.click();a.remove();
+      flash($('expBtn'),'✓');
+    }catch(e){}
+    copyToClipboard(json,null);
+  };
+  $('impBtn').onclick=()=>$('impFile').click();
+  $('impFile').onchange=e=>{
+    const f=e.target.files[0];if(!f)return;
+    const r=new FileReader();
+    r.onload=()=>{
+      try{
+        const data=JSON.parse(r.result);let n=0;
+        for(const k in data){if(+k>=0&&+k<Q.length&&data[k]){ST[k]=Object.assign({},ST[k],data[k]);n++}}
+        store.set('jq_lc',ST);draw();alert('Imported '+n+' answers.');
+      }catch(err){alert('Could not read that file: '+err.message)}
+      e.target.value='';
+    };
+    r.readAsText(f);
+  };
+}
+setupBackup();
+setupFilters();
+initTheme();
+initCloudModal();
+cloudSync.init();
+const savedTxtColor=store.get('ed_txt_color','');
+if(savedTxtColor){document.documentElement.style.setProperty('--ed-text',savedTxtColor);}
+draw();
+
+</script></body></html>
